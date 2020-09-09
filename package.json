@@ -1,0 +1,57 @@
+{
+  "name": "hostman",
+  "version": "1.0.0",
+  "description": "An interface to manage your system's hosts file, and does a bit more!",
+  "bin": {
+    "hostman": "./hostman.js"
+  },
+  "scripts": {
+    "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
+    "debug": "gulp default",
+    "postinstall": "node install/postinstall.js",
+    "preuninstall": "echo \"TODO: kill any running hostman services\"",
+    "postuninstall": "echo \"TODO: remove the hostman host binding from the hosts file\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thebrenny/hostman.git"
+  },
+  "keywords": [
+    "hosts",
+    "dns"
+  ],
+  "author": "TheBrenny <iam@justbrenny.me>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/thebrenny/hostman/issues"
+  },
+  "homepage": "https://github.com/thebrenny/hostman#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "hostile": "^1.3.2",
+    "morgan": "^1.10.0",
+    "native-is-elevated": "^0.4.1",
+    "readline-sync": "^1.4.10",
+    "scetch": "^1.0.0",
+    "sudo-prompt": "^9.2.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-sass": "^4.1.0",
+    "nodemon": "^2.0.4"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "app/views/",
+      "app/assets/"
+    ],
+    "watch": [
+      "hostman.js",
+      "app/"
+    ]
+  }
+}
