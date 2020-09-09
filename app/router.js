@@ -70,7 +70,7 @@ module.exports = async function (req, res) {
                     if (res.headersSent) break; // if tx started, break to stop matching
                 } catch (e) {
                     // Otherwise, catch the error (probably from the promise) and try a new match
-                    error = getAcceptedResponseFormat(req, 500, "Problem resolving route: " + matches);
+                    error = getAcceptedResponseFormat(req, 500, errors[500] + ": Problem resolving route: " + matches);
                 }
 
                 // Commented bc We don'r want to lose the chance that another handler can tx. (eg 404)
