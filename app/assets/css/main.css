@@ -1,0 +1,103 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+* {
+  text-align: center;
+  font-family: 'Gintronic', 'Nova Mono', 'Roboto Mono', 'Ubuntu Mono', 'Courier New', 'Courier', 'monospace'; }
+
+h1 {
+  width: 100%;
+  margin: 0;
+  font-size: 3em; }
+
+body {
+  background-color: #81d4fa;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.main,
+.row {
+  border-radius: 0.6rem;
+  padding: 1rem;
+  display: flex; }
+
+.main {
+  background-color: #FFFFFF44;
+  width: 60%;
+  height: 80%;
+  margin: 0;
+  flex-flow: column nowrap;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  gap: 1rem; }
+  .main.overflowing {
+    gap: 1.5rem; }
+    .main.overflowing .row {
+      flex-direction: column !important; }
+
+.row {
+  margin: 0;
+  background-color: #FFFFFF44;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.75rem; }
+  .row input.hostname,
+  .row input.address {
+    border-radius: 0.6rem;
+    padding: 1rem 1.2rem 1rem 0.2rem !important;
+    font-size: 1.3rem;
+    border: none;
+    display: block;
+    box-sizing: border-box;
+    transition: border 0.2s;
+    background: #FFFFFF44;
+    border-bottom: 0.1rem solid rgba(142, 49, 230, 0); }
+    .row input.hostname:hover, .row input.hostname:focus,
+    .row input.address:hover,
+    .row input.address:focus {
+      border-bottom: 0.1rem solid #8e31e6;
+      outline: none; }
+  .row input.address {
+    flex-grow: 2; }
+  .row img.hostAction {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: auto;
+    opacity: 0.4;
+    transition: 0.2s ease-out;
+    cursor: pointer; }
+    .row img.hostAction.spinner {
+      cursor: initial;
+      opacity: 1;
+      animation: spinner 1s linear infinite; }
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg); }
+  50% {
+    transform: rotate(180deg); }
+  100% {
+    transform: rotate(360deg); } }
+    .row img.hostAction:hover {
+      opacity: 1; }
+  .row.newHost {
+    justify-content: center; }
+    .row.newHost .btn {
+      flex-grow: 0.25; }
+
+.btn {
+  background: #74D774;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+  user-select: none; }
+  .btn:hover {
+    background: #39c639; }
+  .btn:active {
+    background: #2d9e2d; }
