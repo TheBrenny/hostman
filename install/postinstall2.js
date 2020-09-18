@@ -1,7 +1,10 @@
-const hostile = require("hostile");
+const hosts = require("hosts-etc");
 
-hostile.set("127.3.3.3", "hostman", (e) => {
-    if (e !== undefined) {
-        console.error(e);
-    }
-});
+let host = {
+    host: "hostman",
+    address: "127.3.3.3",
+    region: "hostman",
+    comment: "hostman {invincible}"
+};
+
+hosts.set(host);
