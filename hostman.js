@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 
 const http = require("http");
-const router =  require("./app/router");
-const routes = require("./app/routes");
+const router = require("./app/router");
 const logRequest = require("./app/logRequest");
+const apiRoutes = require("./app/api/routes");
+const publicRoutes = require("./app/public/routes");
 const serverInfo = {
     host: "hostman",
     port: 80
 };
 
-router.register(routes);
+router.register(apiRoutes);
+router.register(publicRoutes);
 
 const server = http.createServer((req, res) => {
     logRequest(req, res);

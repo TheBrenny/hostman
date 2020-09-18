@@ -1,7 +1,7 @@
 const {
     version
-} = require('../package.json');
-const hostile = require('hostile');
+} = require('../../package.json');
+const hostsEtc = require('hosts-etc').promise;
 
 async function home() {
     return {
@@ -11,13 +11,11 @@ async function home() {
 }
 
 async function hosts() {
-    let lines = hostile.get(true);
+    let hosts = await hostsEtc.get();
 
     let obj = {};
 
-    return {
-
-    };
+    return [];
 }
 
 module.exports.home = home;

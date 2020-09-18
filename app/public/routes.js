@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const api = require("./api");
+const api = require("../api/api");
 const scetch = require('scetch')({
     root: path.join(__dirname, "views")
 });
@@ -44,28 +44,11 @@ module.exports = (router) => {
     });
     router.get("/", async function (req, res) {
         return render("home", {
-            hosts: api.hosts()
+            hosts: await api.hosts()
         }).then(data => {
             res.setHeader("Content-Type", "text/html");
             res.write(data);
             res.end();
         });
-    });
-
-    router.get("/api/", async function (req, res) {
-        return api.home()
-            .then(data => {
-                res.setHeader("Content-Type", "application/json");
-                res.write(JSON.stringify(data));
-                res.end();
-            });
-    });
-    router.get("/api/hosts", async function (req, res) {
-        return api.home()
-            .then(data => {
-                res.setHeader("Content-Type", "application/json");
-                res.write(JSON.stringify(data));
-                res.end();
-            });
     });
 };

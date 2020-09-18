@@ -1,23 +1,20 @@
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-const errors = require("./errorCodes");
+const errors = require("./app/errorCodes");
 const routes = {
     get: {},
     post: {}
 };
 
-function getAcceptedResponseFormat(req, code, message) {
-    if(typeof message === "undefined") {
-        message = code.msg;
-        code = code.statusCode;
-    }
-
-    let accept = ["text/plain", m => m];
+function getAcceptedResponseFormat(req, ...data) {
+    let accept = ["text/plain", d => JSON.stringify(d)];
     let acceptPos = req.headers.accept.length + 1;
 
     // Allows for extensibility if we want more formats
     [
-        ["text/html", (m) => `<p>${m}</p>`],
-        ["application/json", (m) => `{"msg":"${m}"}`]
+        ["text/html", (d) => `<pre>${
+            Object.getOwnPropertyNames(d).map(n => n + ": " + d[n]).join("</pre><pre>")
+        }</pre>`],
+        ["application/json", (d) => JSON.stringify(d)]
     ].forEach(el => {
         let idx = req.headers.accept.indexOf(el[0]);
         if (idx < 0) return;
@@ -28,21 +25,28 @@ function getAcceptedResponseFormat(req, code, message) {
     });
 
     // overwrite the fn instead of making a new object.
-    accept[1] = accept[1](message);
+    // turns object 'd' to string.
+    accept[1] = data.map(d => typeof d !== "undefined" ? accept[1](d) : "undefined").join("");
 
     return {
+        data: accept[1],
         contentType: accept[0],
-        statusCode: code,
-        data: accept[1]
+        statusCode: (data.find((v) => v.statusCode) || {
+            statusCode: 200
+        }).statusCode
     };
 }
 
-function writeError(res, err) {
-    err = err || errors[500];
+function writeError(req, res, err, noHead) {
+    head = !noHead;
+    err = ["object", "number"].includes(typeof err) ? err : 500;
+    err = typeof err === "number" ? getAcceptedResponseFormat(req, errors[err]) : err;
 
-    if(!res.headersSent) res.setHeader("Content-Type", err && err.contentType || "text/plain");
-    res.statusCode = err && err.statusCode;
-    res.end(err.data || err);
+    if (head) {
+        res.setHeader("Content-Type", err && err.contentType || "text/plain");
+        res.statusCode = err && err.statusCode || 500;
+    }
+    res.end(err.data || errors[500].msg);
 }
 
 module.exports = async function (req, res) {
@@ -70,7 +74,14 @@ module.exports = async function (req, res) {
                     if (res.headersSent) break; // if tx started, break to stop matching
                 } catch (e) {
                     // Otherwise, catch the error (probably from the promise) and try a new match
-                    error = getAcceptedResponseFormat(req, 500, errors[500] + ": Problem resolving route: " + matches);
+
+                    error = {
+                        statusCode: 500,
+                        msg: 500 + " " + errors[500].msg + " Problem resolving route: " + matches.join(", "),
+                        stack: e.stack
+                    };
+
+                    error = getAcceptedResponseFormat(req, error);
                 }
 
                 // Commented bc We don'r want to lose the chance that another handler can tx. (eg 404)
@@ -78,18 +89,15 @@ module.exports = async function (req, res) {
             }
         }
     }
-    
+
     if (error) {
-        if(typeof error.headersSent !== "undefined" && error.headersSent == true) {
-            res.end(error);
-        } else {
-            writeError(res, error);
-        }
+        let noHead = typeof res.headersSent !== "undefined" && res.headersSent == true;
+        writeError(req, res, error, noHead);
     }
 };
 
 module.exports[404] = async function (req, res) {
-    if (!res.headersSent) writeError(res, getAcceptedResponseFormat(req, errors[404]));
+    if (!res.headersSent) writeError(req, res, 404);
 };
 
 module.exports.register = (routes) => {

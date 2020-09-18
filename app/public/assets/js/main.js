@@ -11,14 +11,19 @@ String.prototype.hashCode = function () {
 
 let main = $(".main");
 let mainScrollTrigger = 0;
-
 let actions = {
-    newHost: addNewRow
+    newHost: addNewRow,
+    delHost: deleteRow,
+    derp: () => {
+        scetchInsert($(".row"), scetch.derp, {
+            test: "Hello World!"
+        });
+    }
 };
 
 function addNewRow() {
     let last = this.target.parentElement;
-    scetchInsert(last, "beforebegin", scetch.newHost);
+    scetchInsert(last, "beforeBegin", scetch.newHost);
     // last.insertAdjacentHTML("beforebegin", row);
     resize();
 }

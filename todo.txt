@@ -1,0 +1,11 @@
+
+In hostman, if dev environment, auto redirect to hostman:81
+
+----------------------------------------------------
+
+get hosts from hostile, then add it using scetch.
+
+add blank line at the end for new host
+ - tick button to confirm creation?
+ - tick button will send it to hostile
+ -> creates spinner, waiting for "done" response from hostile
