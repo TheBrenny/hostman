@@ -5,7 +5,7 @@
         <h1>hostman</h1>
     </div>
     [[e= host in hosts ]]
-        [[c= components/validHost || hash=host.hash host=host.hostname address=host.address ]]
+        [[c= components/validHost || hash=host.comment host=host.host address=host.address ]]
     [[?==]]
     <div class="row newHost">
         <div class="btn" action="newHost">add new host</div>

@@ -3,20 +3,13 @@ const {
 } = require('../../package.json');
 const hostsEtc = require('hosts-etc').promise;
 
-async function home() {
+module.exports.home = async function home() {
     return {
         version: version,
-        hosts: (await hosts())
+        hosts: (await this.hosts())
     };
-}
-
-async function hosts() {
-    let hosts = await hostsEtc.get();
-
-    let obj = {};
-
-    return [];
-}
-
-module.exports.home = home;
-module.exports.hosts = hosts;
+};
+module.exports.hosts = async function hosts() {
+    let h = (await hostsEtc.get("#hostman")).hostman || [];
+    return h;
+};

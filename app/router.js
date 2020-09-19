@@ -1,5 +1,5 @@
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-const errors = require("./app/errorCodes");
+const errors = require("./errorCodes");
 const routes = {
     get: {},
     post: {}
