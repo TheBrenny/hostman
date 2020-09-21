@@ -93,10 +93,19 @@ body {
         transition: 0.2s ease-out;
         cursor: pointer;
 
+        &.tick {
+            content:url("/assets/img/tick.svg");
+        }
+
+        &.delete {
+            content:url("/assets/img/cross.svg");
+        }
+
         &.spinner {
             cursor: initial;
             opacity: 1;
             animation: spinner 1s linear infinite;
+            content:url("/assets/img/spinner.svg");
 
             @keyframes spinner {
                 0% {

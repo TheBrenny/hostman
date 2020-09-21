@@ -71,10 +71,15 @@ body {
     opacity: 0.4;
     transition: 0.2s ease-out;
     cursor: pointer; }
+    .row img.hostAction.tick {
+      content: url("/assets/img/tick.svg"); }
+    .row img.hostAction.delete {
+      content: url("/assets/img/cross.svg"); }
     .row img.hostAction.spinner {
       cursor: initial;
       opacity: 1;
-      animation: spinner 1s linear infinite; }
+      animation: spinner 1s linear infinite;
+      content: url("/assets/img/spinner.svg"); }
 
 @keyframes spinner {
   0% {
