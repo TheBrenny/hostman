@@ -6,7 +6,7 @@ const nodemon = require('gulp-nodemon');
 gulp.task("sass", function () {
     return gulp.src("app/public/assets/scss/**/*.scss")
         .pipe(sass().on("error", sass.logError))
-        .pipe(gulp.dest("app/assets/css/"))
+        .pipe(gulp.dest("app/public/assets/css/"))
         .pipe(browserSync.reload({
             stream: true
         }));
