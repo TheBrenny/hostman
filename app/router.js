@@ -2,7 +2,8 @@
 const errors = require("./errorCodes");
 const routes = {
     get: {},
-    post: {}
+    post: {},
+    delete: {},
 };
 
 function getAcceptedResponseFormat(req, ...data) {
@@ -114,4 +115,7 @@ module.exports.get = function (uri, fn) {
 };
 module.exports.post = function (uri, fn) {
     routes.post[uri] = fn;
+};
+module.exports.delete = function (uri, fn) {
+    routes.delete[uri] = fn;
 };

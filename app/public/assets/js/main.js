@@ -1,19 +1,9 @@
-String.prototype.hashCode = function () {
-    if (this.hashCoded) return this.hashCoded;
-
-    let h;
-    for (let i = 0; i < this.length; i++)
-        h = Math.imul(31, h) + this.charCodeAt(i) | 0;
-
-    this.hashCoded = h;
-    return h;
-};
-
 let main = $(".main");
 let mainScrollTrigger = 0;
 let actions = {
     newHost: addNewRow,
     delHost: deleteRow,
+
     derp: () => {
         scetchInsert($(".row"), scetch.derp, {
             test: "Hello World!"
@@ -21,10 +11,27 @@ let actions = {
     }
 };
 
+if (typeof globalThis.Exception === "undefined") {
+    globalThis.Exception = class Exception {
+        constructor(name, msg) {
+            if (typeof msg === "undefined") {
+                msg = name;
+                name = "Exception";
+            }
+
+            this.name = name;
+            this.message = msg;
+        }
+
+        toString() {
+            return `${this.name}: "${this.message}"`;
+        }
+    };
+}
+
 function addNewRow() {
     let last = this.target.parentElement;
     scetchInsert(last, "beforeBegin", scetch.newHost);
-    // last.insertAdjacentHTML("beforebegin", row);
     resize();
 }
 
@@ -35,21 +42,43 @@ function deleteRow(row) {
     // .catch error => set as cross.svg, make row red, add error div, wait, delete div, fade to normal
 }
 
-function submitToHostile(row) {
-    let host = row.children[0].value;
-    let address = row.children[1].value;
-    if (host.trim().length === 0 || address.trim().length === 0) return false; // TODO: show error instead of nothing!
-    hashRow(row);
-    // generate hash
+function submit(row) {
+    Promise.resolve().then(() => {
+        row.children[2].classList.remove("tick");
+        row.children[2].classList.add("spinner");
+
+        let host = row.children[0].value.trim();
+        let address = row.children[1].value.trim();
+        if (host.length === 0 || address.length === 0) throw new Exception("Host and address cannot be empty!");
+        return {
+            host: host,
+            address: address
+        };
+    }).then(h => {
+        return fetch("/api/hosts", {
+            method: "POST",
+            body: JSON.stringify(h)
+        });
+    }).then(res => res.json()).then(json => {
+        /*{
+            status: 0,
+            updated: 1
+        };
+        */
+       let {status, updated} = json;
+
+        if (status === 0 && updated === 1) row.children[2].classList.add("delete");
+        else throw (status.message || "Unable to update host...");
+    }).catch(e => {
+        // TODO: Write an error
+        console.error(e);
+        row.children[2].classList.add("tick");
+    }).finally(() => {
+        row.children[2].classList.remove("spinner");
+    });
     // send to hostile (through /api/ and as a promise) and set to spinner
     // .then success => set as cross.svg, green row, wait, fade to normal
     // .catch error => set as tick.svg, make row red, add error div, wait, delete div, fade to normal
-}
-
-
-function hashRow(row) {
-    let s = row.children[0].value + row.children[1].value;
-    row.setAttribute("hash", s.hashCode().toString(16));
 }
 
 function $(selector) {
@@ -100,9 +129,8 @@ function ready() {
         } else if (target.matches(".delete")) {
             deleteRow(target.parentElement);
         } else if (target.matches(".tick")) {
-            submitToHostile(target.parentElement);
+            submit(target.parentElement);
         }
-
     };
 
     window.onresize = resize;

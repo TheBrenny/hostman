@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/thebrenny/hostman#readme",
   "dependencies": {
-    "hosts-etc": "^1.0.0",
+    "hosts-etc": "^1.1.0",
     "readline-sync": "^1.4.10",
     "scetch": "^1.1.2",
     "sudo-prompt": "^9.2.1"
@@ -41,8 +41,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "app/views/",
-      "app/assets/"
+      "app/public/views/",
+      "app/public/assets/"
     ],
     "watch": [
       "hostman.js",
