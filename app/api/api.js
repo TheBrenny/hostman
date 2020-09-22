@@ -1,9 +1,11 @@
 const {
     version
 } = require('../../package.json');
-const hostsEtc = require('hosts-etc').promise;
+const hostsEtc = require('hosts-etc').useCache(false).promise;
 const sudo = require("sudo-prompt");
 const path = require("path");
+
+let invincibleHostnames = [];
 
 module.exports.hashHost = function hashHost(host) {
     let hash = 0;
@@ -24,6 +26,12 @@ module.exports.home = async function home() {
 };
 module.exports.hosts = async function hosts() {
     let h = (await hostsEtc.get("#hostman")).hostman || [];
+    Promise.resolve().then(() => {
+        invincibleHostnames = [];
+        for (let host of h) {
+            if (host.comment.includes("{invincible}")) invincibleHostnames.push(host.host);
+        }
+    });
     return h;
 };
 
@@ -33,6 +41,7 @@ module.exports.set = async function set(host) {
 };
 
 module.exports.remove = async function remove(host) {
+    if (invincibleHostnames.includes(host.host)) throw new Error("Cannot remove invincible host!");
     host = genHost(host);
     return parseInt(await doSudo("remove", host));
 };

@@ -11,40 +11,50 @@ let actions = {
     }
 };
 
-if (typeof globalThis.Exception === "undefined") {
-    globalThis.Exception = class Exception {
-        constructor(name, msg) {
-            if (typeof msg === "undefined") {
-                msg = name;
-                name = "Exception";
-            }
-
-            this.name = name;
-            this.message = msg;
-        }
-
-        toString() {
-            return `${this.name}: "${this.message}"`;
-        }
-    };
-}
-
 function addNewRow() {
     let last = this.target.parentElement;
     scetchInsert(last, "beforeBegin", scetch.newHost);
     resize();
 }
 
-function deleteRow(row) {
-    // get hash
-    // send to hostile (through /api/ and as a promise) and set to spinner
-    // .then success => height of row transitions to 0, delete element
-    // .catch error => set as cross.svg, make row red, add error div, wait, delete div, fade to normal
-}
-
 function submit(row) {
+    // TODO: Add a visual representation to indicate a successful add (green), and error (red)
+
     Promise.resolve().then(() => {
         row.children[2].classList.remove("tick");
+        row.children[2].classList.add("spinner");
+
+        let host = row.children[0].value.trim();
+        let address = row.children[1].value.trim();
+        if (host.length === 0 || address.length === 0) throw new Error("Host and address cannot be empty!");
+        return {
+            host: host,
+            address: address
+        };
+    }).then(h => {
+        return fetch("/api/hosts", {
+            method: "POST",
+            body: JSON.stringify(h)
+        });
+    }).then(res => res.json()).then(json => {
+        let {
+            status,
+            updated
+        } = json;
+
+        if (status === 0 && updated === 1) row.children[2].classList.add("delete");
+        else throw (json.message || "Unable to update host...");
+    }).catch(e => {
+        console.error(e);
+        row.children[2].classList.add("tick");
+    }).finally(() => {
+        row.children[2].classList.remove("spinner");
+    });
+}
+
+function deleteRow(row) {
+    Promise.resolve().then(() => {
+        row.children[2].classList.remove("delete");
         row.children[2].classList.add("spinner");
 
         let host = row.children[0].value.trim();
@@ -56,29 +66,28 @@ function submit(row) {
         };
     }).then(h => {
         return fetch("/api/hosts", {
-            method: "POST",
+            method: "DELETE",
             body: JSON.stringify(h)
         });
     }).then(res => res.json()).then(json => {
-        /*{
-            status: 0,
-            updated: 1
-        };
-        */
-       let {status, updated} = json;
+        let {
+            status,
+            updated
+        } = json;
 
-        if (status === 0 && updated === 1) row.children[2].classList.add("delete");
-        else throw (status.message || "Unable to update host...");
+        if (status === 0 && updated >= 1) row.remove();
+        else throw (json.message || "Unable to update host...");
     }).catch(e => {
-        // TODO: Write an error
         console.error(e);
-        row.children[2].classList.add("tick");
+        row.children[2].classList.add("delete");
     }).finally(() => {
         row.children[2].classList.remove("spinner");
     });
+
+    // get hash
     // send to hostile (through /api/ and as a promise) and set to spinner
-    // .then success => set as cross.svg, green row, wait, fade to normal
-    // .catch error => set as tick.svg, make row red, add error div, wait, delete div, fade to normal
+    // .then success => height of row transitions to 0, delete element
+    // .catch error => set as cross.svg, make row red, add error div, wait, delete div, fade to normal
 }
 
 function $(selector) {

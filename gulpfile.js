@@ -34,8 +34,9 @@ gulp.task("nodemon", function (cb) {
         // to avoid nodemon being started multiple times
         // thanks @matthisk
         if (!started) {
-            cb();
             started = true;
+            console.log("Nodemon started.");
+            cb();
         }
     });
 });
