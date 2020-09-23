@@ -15,5 +15,6 @@
 <script src="assets/js/main.js"></script>
 [[l= components/newHost ]]
 [[l= components/validHost ]]
+[[l= components/error ]]
 
 [[i= partials/foot ]]

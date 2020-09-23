@@ -38,7 +38,7 @@ body {
   .main.overflowing {
     gap: 1.5rem; }
     .main.overflowing .row {
-      flex-direction: column !important; }
+      flex-direction: column; }
 
 .row {
   margin: 0;
@@ -46,6 +46,24 @@ body {
   flex-direction: row;
   justify-content: space-between;
   gap: 0.75rem; }
+  .row.error {
+    background: #E77474;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: left; }
+    .row.error pre {
+      word-wrap: normal;
+      background: #00000022;
+      overflow: scroll;
+      padding: 0.3rem;
+      border-radius: 0.3em;
+      margin: 0;
+      flex-grow: 1;
+      text-align: left; }
+  .row.newHost {
+    justify-content: center; }
+    .row.newHost .btn {
+      flex-grow: 0.25; }
   .row input.hostname,
   .row input.address {
     border-radius: 0.6rem;
@@ -64,22 +82,29 @@ body {
       outline: none; }
   .row input.address {
     flex-grow: 2; }
+  .row .actions {
+    display: inline-flex;
+    flex-flow: column; }
+  .row img.cross {
+    content: url("/assets/img/cross.svg");
+    width: 2rem;
+    height: 2rem; }
   .row img.hostAction {
     width: 1.1rem;
     height: 1.1rem;
     margin: auto;
     opacity: 0.4;
-    transition: 0.2s ease-out;
-    cursor: pointer; }
+    transition: opacity 0.2s ease-out; }
     .row img.hostAction.tick {
-      content: url("/assets/img/tick.svg"); }
-    .row img.hostAction.delete {
-      content: url("/assets/img/cross.svg"); }
+      content: url("/assets/img/tick.svg");
+      cursor: pointer; }
+    .row img.hostAction.delete, .row img.hostAction.cancel {
+      content: url("/assets/img/cross.svg");
+      cursor: pointer; }
     .row img.hostAction.spinner {
-      cursor: initial;
       opacity: 1;
       animation: spinner 1s linear infinite;
-      content: url("/assets/img/spinner.svg"); }
+      content: url("/assets/img/spinner.svg") !important; }
 
 @keyframes spinner {
   0% {
@@ -90,10 +115,6 @@ body {
     transform: rotate(360deg); } }
     .row img.hostAction:hover {
       opacity: 1; }
-  .row.newHost {
-    justify-content: center; }
-    .row.newHost .btn {
-      flex-grow: 0.25; }
 
 .btn {
   background: #74D774;

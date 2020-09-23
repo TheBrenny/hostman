@@ -37,12 +37,14 @@ module.exports.hosts = async function hosts() {
 
 module.exports.set = async function set(host) {
     host = genHost(host);
+    console.log("Trying to set " + host.host + ", " + host.address);
     return parseInt(await doSudo("set", host));
 };
 
 module.exports.remove = async function remove(host) {
     if (invincibleHostnames.includes(host.host)) throw new Error("Cannot remove invincible host!");
     host = genHost(host);
+    console.log("Trying to remove " + host.host + ", " + host.address);
     return parseInt(await doSudo("remove", host));
 };
 
@@ -61,9 +63,12 @@ async function doSudo(action, host) {
         sudo.exec(process.argv[0] + " \"" + path.join(__dirname, "sudoThis.js") + "\" " + action, {
             env: {
                 HOSTMAN_TARGET: host
-            }
+            },
+            name: "hostman",
+            //icns: "favicon.ico"
         }, (err, stdout, stderr) => {
             if (err || stderr) {
+                console.error(err || stderr);
                 reject(err || JSON.parse(stderr));
             } else {
                 resolve(stdout);

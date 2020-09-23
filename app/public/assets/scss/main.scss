@@ -2,6 +2,7 @@ $baseColor: #81d4fa;
 $blockColor: #FFFFFF44;
 $borderColor: #8e31e6;
 $btnColor: #74D774;
+$errColor: #E77474;
 
 html,
 body {
@@ -50,7 +51,7 @@ body {
         gap: 1.5rem;
 
         .row {
-            flex-direction: column !important;
+            flex-direction: column;
         }
     }
 }
@@ -61,6 +62,32 @@ body {
     flex-direction: row;
     justify-content: space-between;
     gap: 0.75rem;
+
+    &.error {
+        background: $errColor;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: left;
+
+        pre {
+            word-wrap: normal;
+            background: #00000022;
+            overflow: scroll;
+            padding: 0.3rem;
+            border-radius: 0.3em;
+            margin: 0;
+            flex-grow: 1;
+            text-align: left;
+        }
+    }
+
+    &.newHost {
+        justify-content: center;
+
+        .btn {
+            flex-grow: 0.25;
+        }
+    }
 
     input.hostname,
     input.address {
@@ -85,55 +112,63 @@ body {
         flex-grow: 2;
     }
 
-    img.hostAction {
-        width: 1.1rem;
-        height: 1.1rem;
-        margin: auto;
-        opacity: 0.4;
-        transition: 0.2s ease-out;
-        cursor: pointer;
+    .actions {
+        display: inline-flex;
+        flex-flow: column;
+    }
 
-        &.tick {
-            content:url("/assets/img/tick.svg");
+    img {
+        &.cross {
+            content: url("/assets/img/cross.svg");
+            width: 2rem;
+            height: 2rem;
         }
 
-        &.delete {
-            content:url("/assets/img/cross.svg");
-        }
+        &.hostAction {
+            width: 1.1rem;
+            height: 1.1rem;
+            margin: auto;
+            opacity: 0.4;
+            transition: opacity 0.2s ease-out;
 
-        &.spinner {
-            cursor: initial;
-            opacity: 1;
-            animation: spinner 1s linear infinite;
-            content:url("/assets/img/spinner.svg");
+            &.tick {
+                content: url("/assets/img/tick.svg");
+                cursor: pointer;
 
-            @keyframes spinner {
-                0% {
-                    transform: rotate(0deg);
-                }
+            }
 
-                50% {
-                    transform: rotate(180deg);
-                }
+            &.delete,
+            &.cancel {
+                content: url("/assets/img/cross.svg");
+                cursor: pointer;
+            }
 
-                100% {
-                    transform: rotate(360deg);
+            &.spinner {
+                opacity: 1;
+                animation: spinner 1s linear infinite;
+                content: url("/assets/img/spinner.svg") !important;
+
+                @keyframes spinner {
+                    0% {
+                        transform: rotate(0deg);
+                    }
+
+                    50% {
+                        transform: rotate(180deg);
+                    }
+
+                    100% {
+                        transform: rotate(360deg);
+                    }
                 }
             }
-        }
 
-        &:hover {
-            opacity: 1;
-        }
-    }
-
-    &.newHost {
-        justify-content: center;
-
-        .btn {
-            flex-grow: 0.25;
+            &:hover {
+                opacity: 1;
+            }
         }
     }
+
 }
 
 .btn {

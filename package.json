@@ -29,7 +29,7 @@
   "dependencies": {
     "hosts-etc": "^1.1.0",
     "readline-sync": "^1.4.10",
-    "scetch": "^1.1.2",
+    "scetch": "^1.2.0",
     "sudo-prompt": "^9.2.1"
   },
   "devDependencies": {
