@@ -1,5 +1,5 @@
 {
-  "name": "hostman",
+  "name": "@thebrenny/hostman",
   "version": "1.0.0",
   "description": "An interface to manage your system's hosts file, and does a bit more!",
   "bin": {
