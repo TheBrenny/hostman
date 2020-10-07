@@ -6,12 +6,12 @@ Hostman is an easy to use web app that allows you to manage your hosts file with
 
 The motivation for this project is quite simple, and likely one that you can sympathise with: I just want to use hostnames instead of IP addresses when I'm spinning local dev servers.
 
-~~The one extra thing that hostman can do though, is bind a hostname to a fully resolvable URL! So if you want to, you can point `http://yt` to `https://youtube.com`, or `http://git/` to `https://github.com`!~~
+~~The one extra thing that hostman can do though, is bind a hostname to a fully resolvable URL! So if you want to, you can point `http://yt` to `https://youtube.com`, or `http://git/` to `https://github.com`! Most browsers even accept `url/` as a valid URL!~~
 
 ## Installation
 
 ```console
-$ npm install -g hostman
+$ npm install -g @thebrenny/hostman
 ```
 
 Hostman will bind itself to `127.3.3.3` but to do that it needs to have [access to sudo/Admin](#sudo). Once accepted and hostman is installed globally, you can spin up the hostman server by typing `hostman` at the terminal. Doing this manually can keep you more secure as the server is run at your level, with `sudo-prompt` asking if you want to modify the host file each and every time.
