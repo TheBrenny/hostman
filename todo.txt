@@ -3,9 +3,4 @@ In hostman, if dev environment, auto redirect to hostman:81
 
 ----------------------------------------------------
 
-get hosts from hosts-etc, then add it using scetch.
-
-add blank line at the end for new host
- - tick button to confirm creation?
- - tick button will send it to hosts-etc
- -> creates spinner, waiting for "done" response from hosts-etc
+add host to url (JSON file in the hosts folder?)

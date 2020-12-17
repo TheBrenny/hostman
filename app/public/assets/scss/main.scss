@@ -23,6 +23,13 @@ h1 {
     font-size: 3em;
 }
 
+#versionNumber {
+    flex-grow: 1;
+    margin: 0;
+    height: 1em;
+    margin-top: -1em !important;
+}
+
 body {
     background-color: $baseColor;
     display: flex;
@@ -59,9 +66,16 @@ body {
 .row {
     margin: 0;
     background-color: $blockColor;
-    flex-direction: row;
     justify-content: space-between;
     gap: 0.75rem;
+    flex-flow: row wrap;
+
+    & .br {
+        flex-grow: 1;
+        flex-shrink: 0;
+        height: 0px;
+        width: 100%;
+    }
 
     &.error {
         background: $errColor;

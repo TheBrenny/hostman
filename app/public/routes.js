@@ -43,9 +43,7 @@ module.exports = (router) => {
         });
     });
     router.get("/", async function (req, res) {
-        return render("home", {
-            hosts: await api.hosts()
-        }).then(data => {
+        return render("home", await api.home()).then(data => {
             res.setHeader("Content-Type", "text/html");
             res.write(data);
             res.end();

@@ -220,20 +220,12 @@ async function createError(row, err) {
 
 
 function resize() {
-    let rows = $$(".row");
+    let main = $(".main");
 
-    for (let row of rows) {
-        if (row.scrollWidth > row.clientWidth) {
-            if (!main.classList.contains("overflowing")) {
-                main.classList.add("overflowing");
-                mainScrollTrigger = row.clientWidth;
-                break;
-            }
-        }
-        if (row.clientWidth > mainScrollTrigger && mainScrollTrigger > 0) {
-            main.classList.remove("overflowing");
-            mainScrollTrigger = 0;
-        }
+    if (main.clientWidth <= 728) {
+        if (!main.classList.contains("overflowing")) main.classList.add("overflowing");
+    } else {
+        main.classList.remove("overflowing");
     }
 }
 

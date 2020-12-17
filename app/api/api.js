@@ -2,6 +2,7 @@ const {
     version
 } = require('../../package.json');
 const hostsEtc = require('hosts-etc').useCache(false).promise;
+const hostsJson = require("./hosts-json");
 const sudo = require("sudo-prompt");
 const path = require("path");
 
@@ -25,14 +26,15 @@ module.exports.home = async function home() {
     };
 };
 module.exports.hosts = async function hosts() {
-    let h = (await hostsEtc.get("#hostman")).hostman || [];
+    let hosts = (await hostsEtc.get("#hostman")).hostman || [];
+    // TODO: Add HostsJSON redirects
     Promise.resolve().then(() => {
         invincibleHostnames = [];
-        for (let host of h) {
+        for (let host of hosts) {
             if (host.comment.includes("{invincible}")) invincibleHostnames.push(host.host);
         }
     });
-    return h;
+    return hosts;
 };
 
 module.exports.set = async function set(host) {

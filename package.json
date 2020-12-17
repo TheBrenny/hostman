@@ -9,8 +9,8 @@
     "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
     "debug": "gulp default",
     "postinstall": "node install/postinstall.js",
-    "preuninstall": "echo \"TODO: kill any running hostman services\"",
-    "postuninstall": "echo \"TODO: remove the hostman host binding from the hosts file\""
+    "preuninstall": "node install/uninstall.js",
+    "build-service-win": "qckwinsvc --name \"hostman\" --description \"A web service to modify your hostfile. github.com/TheBrenny/hostman\" --script \"./hostman.js\""
   },
   "repository": {
     "type": "git",
@@ -29,15 +29,18 @@
   "dependencies": {
     "hosts-etc": "^1.1.0",
     "readline-sync": "^1.4.10",
-    "scetch": "^1.2.0",
+    "scetch": "^1.2.4",
     "sudo-prompt": "^9.2.1"
   },
+  "optionalDependencies": {
+    "qckwinsvc": "latest"
+  },
   "devDependencies": {
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.26.13",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
     "gulp-sass": "^4.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.6"
   },
   "nodemonConfig": {
     "ignore": [
