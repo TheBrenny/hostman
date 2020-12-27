@@ -14,23 +14,24 @@ function $$(selector) {
     return document.querySelectorAll(selector);
 }
 
-function $addEvent(element, event, strict, cb) {
+function $addEvent(element, event, strictTarget, cb) {
     if (typeof cb === "undefined") {
-        cb = strict;
-        strict = {};
+        cb = strictTarget;
+        strictTarget = {};
     }
-    strict = strict || {};
-    element.addEventListener(event, element.fn = (e) => {
-        for (let o in strict)
-            if (e[o] !== strict[o]) return;
+    strictTarget = strictTarget || {};
+    element.customEvents = element.customEvents || {};
+    element.addEventListener(event, element.customEvents[event] = (e) => {
+        for (let o in strictTarget)
+            if (e[o] !== strictTarget[o]) return;
 
         cb(e);
     });
 }
 
 function $remEvent(element, event) {
-    element.removeEventListener(event, element.fn);
-    element.fn = null;
+    element.removeEventListener(event, element.customEvents[event]);
+    delete element.customEvents[event];
 }
 
 async function wait(time, obj) {
@@ -52,10 +53,14 @@ function submit(row) {
 
         let host = row.querySelector(".hostname").value.trim();
         let address = row.querySelector(".address").value.trim();
+        let hash = row.attributes.hash.value;
+
         if (host.length === 0 || address.length === 0) throw new Error("Host and address cannot be empty!");
+
         return {
             host: host,
-            address: address
+            address: address,
+            comment: hash
         };
     }).then(h => {
         return fetch("/api/hosts", {
@@ -65,12 +70,17 @@ function submit(row) {
     }).then(res => res.json()).then(json => {
         let {
             status,
-            updated
+            updated,
+            hash
         } = json;
 
         if (!(status === 0 && updated === 1)) throw (json.message || "Unable to update host...");
-    }).then(() => { // good response
+        return hash;
+    }).then((hash) => { // good response
+        row.setAttribute("hash", hash);
+
         return Promise.resolve()
+            .then(() => prepareRow(row))
             .then(() => setRowActions(row, false, true, false, false))
             .then(() => row.style["background-color"] = greenRowColor)
             .then(() => {
@@ -103,10 +113,14 @@ function deleteRow(row) {
 
             let host = row.children[0].value.trim();
             let address = row.children[1].value.trim();
+            let hash = row.attributes.hash.value;
+
             if (host.length === 0 || address.length === 0) throw new Error("Host and address cannot be empty!");
+
             return {
                 host: host,
-                address: address
+                address: address,
+                comment: hash
             };
         }).then(h => {
             return fetch("/api/hosts", {
@@ -133,11 +147,21 @@ function deleteRow(row) {
 
 function cancelRow(row) {
     Promise.resolve()
-        .then(() => setRowActions(row, false, false, false, false))
-        .then(() => row.style["background-color"] = redRowColor)
-        .then(() => fadeout(row))
-        .then(() => shrink(row))
-        .then(() => row.remove());
+        .then(async () => {
+            if (row.attributes.hash.value === "") {
+                setRowActions(row, false, false, false, false);
+                row.style["background-color"] = redRowColor;
+                await fadeout(row);
+                await shrink(row);
+                row.remove();
+            } else {
+                setRowActions(row, false, true, false, false);
+                row.querySelectorAll("input").forEach(i => {
+                    if (i.backupVal != null) i.value = i.backupVal;
+                    i.backupVal = null;
+                });
+            }
+        });
 }
 
 function setRowActions(row, tick, del, cancel, spinner) {
@@ -147,20 +171,29 @@ function setRowActions(row, tick, del, cancel, spinner) {
     row.querySelector("img.spinner").hidden = !spinner;
 }
 
-function setTransition(row, targets) {
-    targets = Object.assign({
+function setTransition(row, attribs) {
+    attribs = Object.assign({
         speed: 1000,
         fn: "linear"
-    }, targets);
+    }, attribs);
 
     let transition = [];
-    for (let t in targets) {
+    for (let t in attribs) {
         if (!["speed", "fn"].includes(t)) {
-            transition.push(`${t} ${targets.speed}ms ${targets.fn}`);
-            row.style[t] = targets[t];
+            transition.push(`${t} ${attribs.speed}ms ${attribs.fn}`);
+            row.style[t] = attribs[t];
         }
     }
     row.style.transition = transition.join(", ");
+}
+
+function prepareRow(row) {
+    row.querySelectorAll("input").forEach(i => {
+        $addEvent(i, "beforeinput", () => {
+            if (i.backupVal == null) i.backupVal = i.value;
+            setRowActions(row, true, false, true, false);
+        });
+    });
 }
 
 async function fadeout(row) {
@@ -193,7 +226,6 @@ async function shrink(row) {
         $addEvent(row, "transitionend", {
             target: row
         }, (e) => {
-            console.log(e);
             $remEvent(row, "transitionend");
             row.style.transition = "";
             resolve(row);
@@ -244,6 +276,8 @@ function ready() {
             cancelRow(target.parentElement.parentElement);
         }
     };
+
+    $$(".row.host").forEach(prepareRow);
 
     window.onresize = resize;
 }

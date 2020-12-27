@@ -29,11 +29,12 @@ module.exports = (router) => {
         return new Promise((resolve, reject) => {
             req.on('error', e => reject(e));
             req.on('end', () => resolve(JSON.parse(Buffer.concat(data))));
-        }).then(api.set).then((updated) => {
-            if (updated === 0) throw new Error("Host wasn't updated!");
+        }).then(api.set).then((hash) => {
+            if (hash === 0) throw new Error("Host wasn't updated!");
             res.write(JSON.stringify({
                 status: 0,
-                updated: updated
+                updated: 1,
+                hash: hash
             }));
         }).catch(e => {
             // write error

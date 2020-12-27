@@ -70,7 +70,12 @@ body {
       border-radius: 0.3em;
       margin: 0;
       flex-grow: 1;
-      text-align: left; }
+      text-align: left;
+      /* Hide scrollbars */
+      -ms-overflow-style: none;
+      scrollbar-width: none; }
+      .row.error pre::-webkit-scrollbar {
+        display: none; }
   .row.newHost {
     justify-content: center; }
     .row.newHost .btn {

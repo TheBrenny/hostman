@@ -92,6 +92,14 @@ body {
             margin: 0;
             flex-grow: 1;
             text-align: left;
+
+            /* Hide scrollbars */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
         }
     }
 

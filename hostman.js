@@ -3,6 +3,7 @@
 const http = require("http");
 const router = require("./app/router");
 const logRequest = require("./app/logRequest");
+const redirector = require("./app/redirector");
 const apiRoutes = require("./app/api/routes");
 const publicRoutes = require("./app/public/routes");
 const serverInfo = {
@@ -10,6 +11,7 @@ const serverInfo = {
     port: 80
 };
 
+router.register(redirector);
 router.register(apiRoutes);
 router.register(publicRoutes);
 

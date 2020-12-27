@@ -3,8 +3,7 @@ const {
 } = require('../../package.json');
 const hostsEtc = require('hosts-etc').useCache(false).promise;
 const hostsJson = require("./hosts-json");
-const sudo = require("sudo-prompt");
-const path = require("path");
+const doSudo = require("./sudoThis").doSudo;
 
 let invincibleHostnames = [];
 
@@ -27,6 +26,8 @@ module.exports.home = async function home() {
 };
 module.exports.hosts = async function hosts() {
     let hosts = (await hostsEtc.get("#hostman")).hostman || [];
+    let jsons = (await hostsJson.get()) || [];
+    hosts = hosts.concat(jsons);
     // TODO: Add HostsJSON redirects
     Promise.resolve().then(() => {
         invincibleHostnames = [];
@@ -38,9 +39,31 @@ module.exports.hosts = async function hosts() {
 };
 
 module.exports.set = async function set(host) {
+    host.host = host.host.trim();
+    host.address = host.address.trim();
+    host.comment = host.comment.trim();
+
+    if (host.comment != "") {
+        await module.exports.remove(host);
+    }
+
+    let ipRegex = /^(\d{1,3}\.){3}(\d{1,3})$/g; // rudimentary ip check
+    let isRedirect = !ipRegex.test(host.address);
+
     host = genHost(host);
     console.log("Trying to set " + host.host + ", " + host.address);
-    return parseInt(await doSudo("set", host));
+
+    let r = "";
+
+    if (!isRedirect) {
+        r = parseInt(await doSudo("set", host));
+    } else {
+        // TODO: FINISH THIS
+        r = parseInt(await hostsJson.set(host));
+    }
+
+    if (r > 0) r = host.comment;
+    return r;
 };
 
 module.exports.remove = async function remove(host) {
@@ -54,27 +77,7 @@ function genHost(host) {
     return {
         host: host.host,
         address: host.address,
-        comment: module.exports.hashHost(host),
+        comment: host.comment || module.exports.hashHost(host),
         region: "hostman"
     };
-}
-
-async function doSudo(action, host) {
-    host = JSON.stringify(host);
-    return new Promise((resolve, reject) => {
-        sudo.exec(process.argv[0] + " \"" + path.join(__dirname, "sudoThis.js") + "\" " + action, {
-            env: {
-                HOSTMAN_TARGET: host
-            },
-            name: "hostman",
-            //icns: "favicon.ico"
-        }, (err, stdout, stderr) => {
-            if (err || stderr) {
-                console.error(err || stderr);
-                reject(err || JSON.parse(stderr));
-            } else {
-                resolve(stdout);
-            }
-        });
-    });
 }

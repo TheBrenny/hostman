@@ -10,7 +10,7 @@
     "debug": "gulp default",
     "postinstall": "node install/postinstall.js",
     "preuninstall": "node install/uninstall.js",
-    "build-service-win": "qckwinsvc --name \"hostman\" --description \"A web service to modify your hostfile. github.com/TheBrenny/hostman\" --script \"./hostman.js\""
+    "build-service-win": "(which qckwinsvc || where qckwinsvc) && qckwinsvc --name \"hostman\" --description \"A web service to modify your hostfile. github.com/TheBrenny/hostman\" --script \"./hostman.js\""
   },
   "repository": {
     "type": "git",
@@ -27,13 +27,10 @@
   },
   "homepage": "https://github.com/thebrenny/hostman#readme",
   "dependencies": {
-    "hosts-etc": "^1.1.0",
+    "hosts-etc": "^1.3.0",
     "readline-sync": "^1.4.10",
     "scetch": "^1.2.4",
     "sudo-prompt": "^9.2.1"
-  },
-  "optionalDependencies": {
-    "qckwinsvc": "latest"
   },
   "devDependencies": {
     "browser-sync": "^2.26.13",
