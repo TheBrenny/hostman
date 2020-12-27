@@ -1,6 +1,3 @@
-const {
-    version
-} = require('../../package.json');
 const hostsEtc = require('hosts-etc').useCache(false).promise;
 const doSudo = require("./sudoThis").doSudo;
 const path = require("path");
@@ -25,10 +22,12 @@ module.exports.get = async function get() {
     return fs.readFile(jsonFile)
         .then(d => JSON.parse(d))
         .then(json => {
-            console.log(json);
             return json;
         });
 };
 module.exports.set = async function set(host) {
     return doSudo("setRedirect", jsonFile, host);
+};
+module.exports.remove = async function remove(host) {
+    return doSudo("removeRedirect", jsonFile, host);
 };

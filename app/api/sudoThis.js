@@ -6,23 +6,35 @@ const sudo = require("sudo-prompt");
 
 // TODO: Check if host is invincible, if so, refuse to act on it.
 
+function redirectify(h) {
+    return Object.assign({}, h, {
+        region: "hostman-redirects",
+        address: "127.3.3.3"
+    });
+}
+
 module.exports.set = (h) => {
     console.log(hosts.set(h));
 };
 module.exports.remove = (h) => {
     console.log(hosts.remove("c#" + h.comment));
 };
+
 module.exports.setRedirect = (f, h) => {
     let json = JSON.parse(fs.readFileSync(f));
     json.push(h);
     fs.writeFileSync(f, JSON.stringify(json));
+    hosts.set(redirectify(h));
+    console.log(1);
 };
 module.exports.removeRedirect = (f, h) => {
     let json = JSON.parse(fs.readFileSync(f));
-    //json.splice([].findIndex((v) => ));
-    // removing based on different traits.
+    json = json.filter(host => host.comment !== h.comment);
     fs.writeFileSync(f, JSON.stringify(json));
+    hosts.remove("c#" + h.comment);
+    console.log(1);
 };
+
 module.exports.testJson = (f) => {
     try {
         fs.accessSync(f);
@@ -33,9 +45,8 @@ module.exports.testJson = (f) => {
     console.log(true);
 };
 
-module.exports.doSudo = async function doSudo(action, host, ...params) {
-    host = JSON.stringify(host).replace(/"/g, "'");
-    params = [host].concat(params || []);
+module.exports.doSudo = async function doSudo(action, ...params) {
+    params = (params || []).map(p => JSON.stringify(p).replace(/"/g, "'"));
     return new Promise((resolve, reject) => {
         let node = process.argv[0];
         let sudoThis = path.join(__dirname, "sudoThis.js");

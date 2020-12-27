@@ -39,6 +39,8 @@ module.exports.hosts = async function hosts() {
 };
 
 module.exports.set = async function set(host) {
+    if (invincibleHostnames.includes(host.host)) throw new Error("Cannot modify invincible host!");
+
     host.host = host.host.trim();
     host.address = host.address.trim();
     host.comment = host.comment.trim();
@@ -58,7 +60,6 @@ module.exports.set = async function set(host) {
     if (!isRedirect) {
         r = parseInt(await doSudo("set", host));
     } else {
-        // TODO: FINISH THIS
         r = parseInt(await hostsJson.set(host));
     }
 
@@ -68,9 +69,22 @@ module.exports.set = async function set(host) {
 
 module.exports.remove = async function remove(host) {
     if (invincibleHostnames.includes(host.host)) throw new Error("Cannot remove invincible host!");
+
+    let ipRegex = /^(\d{1,3}\.){3}(\d{1,3})$/g; // rudimentary ip check
+    let isRedirect = !ipRegex.test(host.address);
+
     host = genHost(host);
     console.log("Trying to remove " + host.host + ", " + host.address);
-    return parseInt(await doSudo("remove", host));
+
+    let r = "";
+
+    if (!isRedirect) {
+        r = parseInt(await doSudo("remove", host));
+    } else {
+        r = parseInt(await hostsJson.remove(host));
+    }
+
+    return r;
 };
 
 function genHost(host) {

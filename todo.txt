@@ -3,4 +3,3 @@ In hostman, if dev environment, auto redirect to hostman:81
 
 ----------------------------------------------------
 
-add host to url (JSON file in the hosts folder?)
