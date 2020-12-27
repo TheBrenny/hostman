@@ -1,6 +1,6 @@
 {
   "name": "@thebrenny/hostman",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "An interface to manage your system's hosts file, and does a bit more!",
   "bin": {
     "hostman": "./hostman.js"
