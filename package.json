@@ -2,6 +2,7 @@
   "name": "@thebrenny/hostman",
   "version": "1.3.0",
   "description": "An interface to manage your system's hosts file, and does a bit more!",
+  "main": "./hostman.js",
   "bin": {
     "hostman": "./hostman.js"
   },
@@ -9,8 +10,7 @@
     "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
     "debug": "gulp default",
     "postinstall": "node install/postinstall.js",
-    "preuninstall": "node install/uninstall.js",
-    "build-service-win": "(which qckwinsvc || where qckwinsvc) && qckwinsvc --name \"hostman\" --description \"A web service to modify your hostfile. github.com/TheBrenny/hostman\" --script \"./hostman.js\""
+    "preuninstall": "node install/uninstall.js"
   },
   "repository": {
     "type": "git",
@@ -29,15 +29,20 @@
   "dependencies": {
     "hosts-etc": "^1.3.0",
     "readline-sync": "^1.4.10",
-    "scetch": "^1.2.4",
+    "scetch": "^1.5.1",
     "sudo-prompt": "^9.2.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.13",
+    "browser-sync": "^2.27.5",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
-    "gulp-sass": "^4.1.0",
-    "nodemon": "^2.0.6"
+    "gulp-sass": "^4.1.1",
+    "nodemon": "^2.0.12"
+  },
+  "optionalDependencies": {
+    "node-windows": "^1.0.0-beta.5",
+    "node-mac": "^1.0.1",
+    "node-linux": "^0.1.12"
   },
   "nodemonConfig": {
     "ignore": [
@@ -48,5 +53,10 @@
       "hostman.js",
       "app/"
     ]
-  }
+  },
+  "files": [
+    "./hostman.js",
+    "./app/**/*",
+    "./install/**/*"
+  ]
 }

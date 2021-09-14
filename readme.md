@@ -2,6 +2,8 @@
 
 Hostman is an easy to use web app that allows you to manage your hosts file without the hassle of finding it, opening it, changing, saving and continuing on with life. Instead, you navigate to `http://hostman/` (or just `hostman/`) and add in your hostname and IP address!
 
+![Hero Image](./hero-screenshot.png)
+
 ## Motivation
 
 The motivation for this project is quite simple, and likely one that you can sympathise with: I just want to use hostnames instead of IP addresses when I'm spinning local dev servers.
@@ -16,7 +18,7 @@ $ npm install -g @thebrenny/hostman
 
 Hostman will bind itself to `127.3.3.3` upon install, but to do that it needs to have [access to sudo/Admin](#sudo). Once accepted and hostman is installed globally, you can spin up the hostman server by typing `hostman` at the terminal. Doing this manually can keep you more secure as the server is run at your level, with `sudo-prompt` asking if you want to modify the host file each and every time.
 
-Otherwise, if you want to take the risk, you can also install `qckwinsvc` (or the equivalent for your system's service manager) to create a service for hostman, to ensure that it is up no matter when you might need it.
+Otherwise, if you want to take the risk, you can also create a service for hostman by running `hostman build-service`.This will ensure that hostman is up no matter when you might need it.
 
 ## Sudo
 

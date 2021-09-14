@@ -1,5 +1,9 @@
+Must Have:
+ -
 
-In hostman, if dev environment, auto redirect to hostman:81
+Should Have:
+ - Handle http: and https: during redirections
 
-----------------------------------------------------
+Could Have:
+ - In hostman, if dev environment, auto redirect to hostman:81
 
