@@ -53,10 +53,5 @@
       "hostman.js",
       "app/"
     ]
-  },
-  "files": [
-    "./hostman.js",
-    "./app/**/*",
-    "./install/**/*"
-  ]
+  }
 }

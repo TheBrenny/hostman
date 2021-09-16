@@ -20,7 +20,7 @@ new Promise((res, rej) => {
     } while (typeof goAhead != "boolean");
     if (goAhead === false) rej({
         suppress: "ok.",
-        errno: 2
+        errno: 0
     });
     let opts = {
         name: "hostman",
