@@ -8,6 +8,18 @@ if(process.argv.includes("remove-service")) {
     require("./install/service").uninstall();
     return;
 }
+if(process.argv.length > 2) { // if we have a command -- clearly not build or remove!
+    console.log("Usage: hostman [build-service|remove-service]");
+    console.log("");
+    console.log("Options:");
+    console.log("  build-service:  Builds the service and starts it");
+    console.log("  remove-service: Removes the service");
+    console.log("");
+    console.log("Entering any other commands will cause this help message to appear, and Hostman will not start.");
+    console.log("");
+    console.log("To change the HOST and PORT that Hostman binds to, edit the hosts file of your machine to the bindings you want, and then set the HOSTMAN_HOST and HOSTMAN_PORT environment variables.");
+    return;
+}
 
 const http = require("http");
 const router = require("./app/router");
@@ -16,8 +28,8 @@ const redirector = require("./app/redirector");
 const apiRoutes = require("./app/api/routes");
 const publicRoutes = require("./app/public/routes");
 const serverInfo = {
-    host: "hostman",
-    port: 80
+    host: process.env.HOSTMAN_HOST ?? "hostman",
+    port: process.env.HOSTMAN_PORT ?? 80
 };
 
 router.register(redirector);
