@@ -1,6 +1,6 @@
 // This script should write to the hosts file
 const sudo = require("sudo-prompt");
-const rl = require("readline-sync");
+const rl = require("readline-sync"); // TODO: remove this dep! 😫
 
 let hostmanIP = process.env.HOSTMAN_IP || "127.3.3.3";
 
