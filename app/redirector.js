@@ -7,7 +7,7 @@ module.exports = (router) => {
         let host = hosts.find(h => h.host === req.host);
 
         res.writeHead(302, {
-            'Location': 'https://' + host.address + req.url
+            'Location': 'https://' + host.address
         });
         res.end();
     });
