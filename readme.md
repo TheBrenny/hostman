@@ -1,8 +1,10 @@
+![Hero Banner](./res/hostman-banner-social.png)
+
 # hostman
 
 Hostman is an easy to use web app that allows you to manage your hosts file without the hassle of finding it, opening it, changing, saving and continuing on with life. Instead, you navigate to `http://hostman/` (or just `hostman/`) and add in your hostname and IP address!
 
-![Hero Image](./hero-screenshot.png)
+![Hero Screenshot](./res/hero-screenshot.png)
 
 ## Motivation
 
