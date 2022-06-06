@@ -1,12 +1,16 @@
 #!/usr/bin/env node
 
+if(process.argv.includes("post-install")) {
+    require("./install/service").install();
+    process.exit(0);
+}
 if(process.argv.includes("build-service")) {
     require("./install/service").install();
-    return;
+    process.exit(0);
 }
 if(process.argv.includes("remove-service")) {
     require("./install/service").uninstall();
-    return;
+    process.exit(0);
 }
 if(process.argv.length > 2) { // if we have a command -- clearly not build or remove!
     console.log("Usage: hostman [build-service|remove-service]");
@@ -18,7 +22,7 @@ if(process.argv.length > 2) { // if we have a command -- clearly not build or re
     console.log("Entering any other commands will cause this help message to appear, and Hostman will not start.");
     console.log("");
     console.log("To change the HOST and PORT that Hostman binds to, edit the hosts file of your machine to the bindings you want, and then set the HOSTMAN_HOST and HOSTMAN_PORT environment variables.");
-    return;
+    process.exit(1);
 }
 
 const http = require("http");

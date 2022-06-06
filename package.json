@@ -10,7 +10,6 @@
     "test": "echo \"There aren't any tests\"",
     "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
     "debug": "gulp default",
-    "postinstall": "node install/postinstall.js",
     "preuninstall": "node install/uninstall.js"
   },
   "repository": {
@@ -37,13 +36,14 @@
     "browser-sync": "^2.27.5",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
+    "gulp-real-favicon": "^0.3.2",
     "gulp-sass": "^4.1.1",
     "nodemon": "^2.0.12"
   },
   "optionalDependencies": {
-    "node-windows": "^1.0.0-beta.5",
+    "node-linux": "^0.1.12",
     "node-mac": "^1.0.1",
-    "node-linux": "^0.1.12"
+    "node-windows": "^1.0.0-beta.5"
   },
   "nodemonConfig": {
     "ignore": [
