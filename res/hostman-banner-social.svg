@@ -33,7 +33,7 @@
      inkscape:window-x="-12"
      inkscape:window-y="-12"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer3"
      inkscape:snap-midpoints="false"
      inkscape:snap-object-midpoints="false"
      inkscape:snap-text-baseline="true"
@@ -287,79 +287,78 @@
          x="238.15031"
          y="407.37006"
          style="fill:#bce8fc;fill-opacity:1;stroke-width:0.951727">A Web App to help you manage your Hosts file!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:124.524px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';letter-spacing:60px;display:inline;fill:#430098;fill-opacity:1;stroke-width:1.03769"
+       x="207.1337"
+       y="307.0206"
+       id="text5466"
+       inkscape:label="title"
+       transform="scale(0.9632395,1.0381634)"><tspan
+         id="tspan5464"
+         x="207.1337"
+         y="307.0206"
+         style="font-weight:bold;font-size:124.524px;fill:#ceeefd;fill-opacity:1;stroke-width:1.03769"
+         sodipodi:role="line">h<tspan
+   style="fill:#ceeefd;fill-opacity:0"
+   id="tspan60009">o</tspan>stman</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="Icon">
+     inkscape:label="Icon"
+     inkscape:export-filename="C:\Users\TheBrenny\My Space\Programming\Web Apps\hostman\res\favicon.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
     <g
-       id="g1639"
-       transform="translate(-10.848219)">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:124.524px;line-height:1.25;font-family:'Noto Sans';-inkscape-font-specification:'Noto Sans';letter-spacing:60px;display:inline;fill:#430098;fill-opacity:1;stroke-width:1.03769"
-         x="218.39592"
-         y="307.0206"
-         id="text5466"
-         inkscape:label="title"
-         transform="scale(0.9632395,1.0381634)"><tspan
-           id="tspan5464"
-           x="218.39592"
-           y="307.0206"
-           style="font-weight:bold;font-size:124.524px;fill:#ceeefd;fill-opacity:1;stroke-width:1.03769"
-           sodipodi:role="line">h<tspan
-   style="fill:#ceeefd;fill-opacity:0"
-   id="tspan60009">o</tspan>stman</tspan></text>
-      <g
-         id="g1669"
-         inkscape:label="window group"
-         transform="translate(324.3239,246.84866)">
-        <rect
-           style="fill:none;stroke:#bce8fc;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="window"
-           width="116"
-           height="71"
-           x="0"
-           y="0"
-           ry="5"
-           rx="5"
-           inkscape:label="window" />
-        <path
-           style="fill:none;stroke:#bce8fc;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 1,14 H 116"
-           id="window_header"
-           inkscape:label="window_header" />
-        <circle
-           style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="button1"
-           cx="7"
-           cy="7.5"
-           r="2.5003078"
-           inkscape:label="button1" />
-        <circle
-           style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="button2"
-           cx="15"
-           cy="7.5"
-           r="2.5003073"
-           inkscape:label="button2" />
-        <circle
-           style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           id="button3"
-           cx="23"
-           cy="7.5"
-           r="2.5003073"
-           inkscape:label="button3" />
-        <path
-           style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 111,9 h -1 c -2,0 -2,-4 -4,-4 -2,0 -2,4 -4,4 C 100,9 100,5 98,5 96,5 96,9 94,9 92,9 92,5 90,5 88,5 88,9 86,9 84,9 84,5 82,5 80,5 80,9 78,9 76,9 76,5 74,5 72,5 72,9 70,9 h -1"
-           id="window_name"
-           inkscape:label="window_name" />
-        <path
-           style="fill:none;stroke:#bce8fc;stroke-width:2.2562;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 62.323897,21.352469 c -0.744275,0.118135 -1.287716,0.762 -1.275904,1.512183 V 34.962119 H 27.779961 c -0.832884,0 -1.512183,0.6793 -1.512183,1.512183 v 12.097465 c 0,0.832884 0.679299,1.512183 1.512183,1.512183 h 33.268032 v 12.097467 c 0.01188,0.567069 0.336698,1.07507 0.844695,1.32316 0.507997,0.248091 1.110509,0.194934 1.565347,-0.141764 L 89.16515,43.704428 c 0.36033,-0.289442 0.567073,-0.720648 0.567073,-1.181393 0,-0.460741 -0.206743,-0.89195 -0.567073,-1.181394 L 63.458035,21.68326 c -0.318974,-0.259907 -0.726557,-0.378046 -1.134138,-0.330791"
-           id="path2772" />
-      </g>
+       id="g1669"
+       inkscape:label="window group"
+       transform="translate(313.47568,246.84866)">
+      <rect
+         style="fill:none;stroke:#bce8fc;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="window"
+         width="116"
+         height="71"
+         x="0"
+         y="0"
+         ry="5"
+         rx="5"
+         inkscape:label="window" />
+      <path
+         style="fill:none;stroke:#bce8fc;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 1,14 H 116"
+         id="window_header"
+         inkscape:label="window_header" />
+      <circle
+         style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button1"
+         cx="7"
+         cy="7.5"
+         r="2.5003078"
+         inkscape:label="button1" />
+      <circle
+         style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button2"
+         cx="15"
+         cy="7.5"
+         r="2.5003073"
+         inkscape:label="button2" />
+      <circle
+         style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button3"
+         cx="23"
+         cy="7.5"
+         r="2.5003073"
+         inkscape:label="button3" />
+      <path
+         style="fill:none;stroke:#bce8fc;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 111,9 h -1 c -2,0 -2,-4 -4,-4 -2,0 -2,4 -4,4 C 100,9 100,5 98,5 96,5 96,9 94,9 92,9 92,5 90,5 88,5 88,9 86,9 84,9 84,5 82,5 80,5 80,9 78,9 76,9 76,5 74,5 72,5 72,9 70,9 h -1"
+         id="window_name"
+         inkscape:label="window_name" />
+      <path
+         style="fill:none;stroke:#bce8fc;stroke-width:2.2562;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 62.323897,21.352469 c -0.744275,0.118135 -1.287716,0.762 -1.275904,1.512183 V 34.962119 H 27.779961 c -0.832884,0 -1.512183,0.6793 -1.512183,1.512183 v 12.097465 c 0,0.832884 0.679299,1.512183 1.512183,1.512183 h 33.268032 v 12.097467 c 0.01188,0.567069 0.336698,1.07507 0.844695,1.32316 0.507997,0.248091 1.110509,0.194934 1.565347,-0.141764 L 89.16515,43.704428 c 0.36033,-0.289442 0.567073,-0.720648 0.567073,-1.181393 0,-0.460741 -0.206743,-0.89195 -0.567073,-1.181394 L 63.458035,21.68326 c -0.318974,-0.259907 -0.726557,-0.378046 -1.134138,-0.330791"
+         id="path2772" />
     </g>
   </g>
   <g
