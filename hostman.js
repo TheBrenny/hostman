@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 if(process.argv.includes("post-install")) {
-    require("./install/service").install();
+    require("./install/postinstall");
     process.exit(0);
 }
 if(process.argv.includes("build-service")) {
