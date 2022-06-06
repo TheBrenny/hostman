@@ -13,7 +13,7 @@ if(process.argv.includes("remove-service")) {
     process.exit(0);
 }
 if(process.argv.length > 2) { // if we have a command -- clearly not build or remove!
-    console.log("Usage: hostman [build-service|remove-service]");
+    console.log("Usage: hostman [post-install|build-service|remove-service]");
     console.log("");
     console.log("Options:");
     console.log("  build-service:  Builds the service and starts it");
