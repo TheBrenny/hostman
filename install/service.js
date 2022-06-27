@@ -10,15 +10,21 @@ const serviceOps = {
 const svc = new Service(serviceOps);
 
 function install() {
-    svc.on("install", () => svc.start());
-    svc.on('alreadyinstalled', () => console.log('This service is already installed.'));
-    svc.on("start", () => console.log("Service started! Go to http://hostman:80"));
-    svc.install();
+    return new Promise((resolve, reject) => {
+        svc.on("install", () => svc.start());
+        svc.on('alreadyinstalled', () => console.log('This service is already installed.') && reject("alreadyinstalled"));
+        svc.on("start", () => console.log("Service started! Go to http://hostman:80") && resolve());
+        svc.on("error", (err) => console.error(err) && reject("error"));
+        svc.install();
+    });
 }
 
 function uninstall() {
-    svc.on("uninstall", () => console.log("Service uninstalled!"));
-    svc.uninstall();
+    return new Promise((resolve, reject) => {
+        svc.on("uninstall", () => console.log("Service uninstalled!") && resolve());
+        svc.on("error", (err) => console.error(err) && reject("error"));
+        svc.uninstall();
+    });
 }
 
 module.exports = {

@@ -10,7 +10,7 @@
     "test": "echo \"There aren't any tests\"",
     "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
     "debug": "gulp default",
-    "preuninstall": "node install/uninstall.js"
+    "preuninstall": "node hostman.js remove-service"
   },
   "repository": {
     "type": "git",
@@ -28,22 +28,21 @@
   "homepage": "https://github.com/thebrenny/hostman#readme",
   "dependencies": {
     "hosts-etc": "^1.3.1",
-    "readline-sync": "^1.4.10",
-    "scetch": "^1.5.1",
+    "scetch": "^1.6.0",
     "sudo-prompt": "^9.2.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.27.5",
+    "browser-sync": "^2.27.10",
     "gulp": "^4.0.2",
     "gulp-nodemon": "^2.5.0",
     "gulp-real-favicon": "^0.3.2",
     "gulp-sass": "^4.1.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.18"
   },
   "optionalDependencies": {
     "node-linux": "^0.1.12",
     "node-mac": "^1.0.1",
-    "node-windows": "^1.0.0-beta.5"
+    "node-windows": "=1.0.0-beta.6"
   },
   "nodemonConfig": {
     "ignore": [

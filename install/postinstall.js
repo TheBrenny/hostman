@@ -1,27 +1,16 @@
 // This script should write to the hosts file
 const sudo = require("sudo-prompt");
-const rl = require("readline-sync"); // TODO: remove this dep! 😫
 
 let hostmanIP = process.env.HOSTMAN_IP || "127.3.3.3";
 
-new Promise((res, rej) => {
+new Promise(async (res, rej) => {
     console.log("hostman needs administrator privileges to bind http://hostman/ to http://" + hostmanIP + ":80/.");
     console.log("These actions are conducted by npm packages 'hosts-etc' and 'sudo-prompt'.");
     console.log("The code for this process is found in the postinstall.js script of the hostman package.");
     console.log("");
+    console.log("Sleeping for 5 seconds... Press Ctrl+C to cancel.");
 
-    let goAhead;
-    do {
-        // promisify this - but how do you dowhile in a promise?
-        goAhead = rl.keyInYN("Are you happy to continue? [Y/n] ", {
-            guide: false
-        });
-        goAhead = goAhead === "" ? true : goAhead;
-    } while (typeof goAhead != "boolean");
-    if (goAhead === false) rej({
-        suppress: "ok.",
-        errno: 0
-    });
+    await new Promise((resolve, reject) => setTimeout(resolve, 5000));
     let opts = {
         name: "hostman",
         //icns: "location to the favicon"
