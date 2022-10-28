@@ -37,12 +37,12 @@
     "gulp-nodemon": "^2.5.0",
     "gulp-real-favicon": "^0.3.2",
     "gulp-sass": "^4.1.1",
-    "nodemon": "^2.0.18"
+    "nodemon": "^2.0.20"
   },
   "optionalDependencies": {
     "node-linux": "^0.1.12",
     "node-mac": "^1.0.1",
-    "node-windows": "=1.0.0-beta.6"
+    "node-windows": "1.0.0-beta.8"
   },
   "nodemonConfig": {
     "ignore": [
