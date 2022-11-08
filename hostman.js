@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 (async () => {
     if(process.argv.includes("post-install")) {
-        require("./install/postinstall");
+        await require("./install/postinstall");
         process.exit(0);
     } else if(process.argv.includes("build-service")) {
         await require("./install/service").install();
@@ -13,6 +13,7 @@
         console.log("Usage: hostman [post-install|build-service|remove-service]");
         console.log("");
         console.log("Options:");
+        console.log("  post-install:   Saves the initial hostman binding to the hosts file.");
         console.log("  build-service:  Builds the service and starts it");
         console.log("  remove-service: Removes the service");
         console.log("");

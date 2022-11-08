@@ -3,7 +3,7 @@ const sudo = require("sudo-prompt");
 
 let hostmanIP = process.env.HOSTMAN_IP || "127.3.3.3";
 
-new Promise(async (res, rej) => {
+module.exports = (new Promise(async (res, rej) => {
     console.log("hostman needs administrator privileges to bind http://hostman/ to http://" + hostmanIP + ":80/.");
     console.log("These actions are conducted by npm packages 'hosts-etc' and 'sudo-prompt'.");
     console.log("The code for this process is found in the postinstall.js script of the hostman package.");
@@ -23,4 +23,4 @@ new Promise(async (res, rej) => {
         console.error(e);
         process.exit(e.errno || 1);
     }
-});
+}));

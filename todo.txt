@@ -6,4 +6,5 @@ Should Have:
 
 Could Have:
  - In hostman, if dev environment, auto redirect to hostman:81
-
+ - Remove "post-install" command and detect if hostman was previously installed
+ - Only let post-install affect non-dev installs
