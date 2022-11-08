@@ -15,7 +15,7 @@ module.exports = (new Promise(async (res, rej) => {
         name: "hostman",
         //icns: "location to the favicon"
     };
-    sudo.exec('node install/postinstall2.js', opts, (err, _, stderr) => err ? rej(err) : stderr ? rej(stderr) : res());
+    sudo.exec(`node ${__dirname}/postinstall2.js`, opts, (err, _, stderr) => err ? rej(err) : stderr ? rej(stderr) : res());
 }).then(() => {
     console.log("Successfully mapped " + hostmanIP + " to hostman!");
 }).catch(e => {
