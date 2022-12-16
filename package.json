@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"There aren't any tests\"",
-    "debug-nodmon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
+    "debug-nodemon": "nodemon --inspect -i ./app/views/ -i ./app/assets/ -i ./package*.json -i ./.vscode/ hostman.js",
     "debug": "gulp default",
     "preuninstall": "node hostman.js remove-service"
   },
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/thebrenny/hostman#readme",
   "dependencies": {
     "hosts-etc": "^1.3.1",
+    "node-sass": "^8.0.0",
     "scetch": "^1.6.0",
     "sudo-prompt": "^9.2.1"
   },

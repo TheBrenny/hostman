@@ -5,6 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "nodemon",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "debug-nodemon"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node",
+            "env": {
+                "HOSTMAN_PORT": "3000"
+            }
+        },
+        {
             "name": "Build Service",
             "program": "${workspaceFolder}/hostman.js",
             "request": "launch",
@@ -24,7 +40,10 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "type": "node"
+            "type": "node",
+            "env": {
+                "HOSTMAN_PORT": "3000"
+            }
         },
     ]
 }

@@ -25,6 +25,8 @@ module.exports = (router) => {
     router.get("/assets/(.*)", async function (req, res) {
         return new Promise((resolve, reject) => {
             let f = req.matches[0][1];
+            let fi = f.indexOf("?");
+            f = f.slice(0,  (fi < 0 ? f.length : fi));
             let type = mime[path.extname(f).slice(1)] || 'text/plain';
 
             let s = fs.createReadStream(path.join(__dirname, "assets", f));
