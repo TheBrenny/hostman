@@ -1,10 +1,3 @@
-$baseColor: #81d4fa;
-$blockColor: #FFFFFF44;
-$shadowColor: #22222222;
-$borderColor: #8e31e6;
-$btnColor: #74D774;
-$errColor: #E77474;
-
 html,
 body {
     width: 100%;
@@ -16,7 +9,7 @@ body {
 * {
     text-align: center;
     box-sizing: border-box;
-    font-family: 'Gintronic', 'Nova Mono', 'Roboto Mono', 'Ubuntu Mono', 'Courier New', 'Courier', 'monospace';
+    font-family: "Gintronic", "Nova Mono", "Roboto Mono", "Ubuntu Mono", "Courier New", "Courier", "monospace";
 }
 
 h1 {
@@ -33,10 +26,35 @@ h1 {
 }
 
 body {
-    background-color: $baseColor;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    --baseColorLight: #81d4fa;
+    --baseColorDark: #545c60;
+    --textColorLight: #201d1d;
+    --textColorDark: #f8f0f0;
+
+    --linkColor: orange;
+    --blockColor: #ffffff44;
+    --shadowColor: #22222222;
+    --borderColor: 142, 49, 230;
+    --errColor: #e77474;
+    --btnColor: #74d774;
+    --btnRedColor: #d83535;
+
+    --base-color: var(--baseColorLight);
+    --text-color: var(--textColorLight);
+
+    background-color: var(--base-color);
+    color: var(--text-color);
+
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+body.darkmode {
+    --base-color: var(--baseColorDark);
+    --text-color: var(--textColorDark);
 }
 
 .main,
@@ -50,8 +68,8 @@ body {
     height: 80%;
     overflow-x: hidden;
     overflow-y: hidden;
-    background-color: $blockColor;
-    box-shadow: inset 0 0 0.3rem 0.3rem $shadowColor;
+    background-color: var(--blockColor);
+    box-shadow: inset 0 0 0.3rem 0.3rem var(--shadowColor);
     border-radius: 0.6rem;
     padding: 0em 1em;
     padding-right: 0.5em;
@@ -73,7 +91,7 @@ body {
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: $shadowColor;
+        background-color: var(--shadowColor);
         border-radius: 10em;
         margin: 1em;
     }
@@ -97,23 +115,179 @@ body {
     }
 }
 
+body {
+    #themebtn {
+        font-size: 2em;
+        width: 2em;
+        height: 2em;
+        padding: 0;
+        overflow: hidden;
+
+        > div {
+            rotate: 0deg;
+            transition: rotate 0.2s cubic-bezier(0.76, 1.5, 0.63, 0.9);
+            display: grid;
+            grid-template-columns: repeat(5, 20%);
+            grid-template-rows: repeat(5, 20%);
+            width: 4em;
+            height: 4em;
+            translate: -25% 15%;
+            transform-origin: center;
+            pointer-events: none;
+
+            > .sun,
+            > .moon {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            > .sun {
+                grid-column: 3;
+                grid-row: 1;
+            }
+            > .moon {
+                grid-column: 5;
+                grid-row: 3;
+                rotate: 90deg;
+            }
+        }
+    }
+    &.darkmode #themebtn > div {
+        rotate: -90deg;
+    }
+    .settingsPanel {
+        position: absolute;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.2s ease;
+
+        .backdrop {
+            background: #22222222;
+            position: absolute;
+            z-index: 50;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+            -webkit-backdrop-filter: blur(1.5px) grayscale(0.75);
+            backdrop-filter: blur(1.5px) grayscale(0.75);
+        }
+
+        .panel {
+            border-radius: 0.6rem;
+            z-index: 100;
+            background-color: var(--base-color);
+            transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            width: 50%;
+            padding: 2em;
+
+            display: flex;
+            flex-flow: column;
+            gap: 1em;
+
+            .row {
+                flex-flow: column;
+                align-items: center;
+
+                .credit {
+                    display: inline-flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    text-decoration: none;
+                    position: relative;
+                    left: calc(50% - 15px);
+                    color: var(--linkColor);
+
+                    > img {
+                        width: 2em;
+                        rotate: 0deg;
+                        transition: rotate 0.2s ease-out;
+                    }
+                    > span {
+                        display: inline-block;
+                        flex: 0;
+                        padding-right: 0;
+                        overflow: hidden;
+                        text-align: center;
+                        transition: flex 0.2s ease-out, padding 0.2s ease-out;
+                    }
+                }
+                .credit:hover {
+                    > img {
+                        rotate: 360deg;
+                    }
+                    > span {
+                        flex: 1;
+                        padding-right: 0.3em;
+                    }
+                }
+                .credit:active {
+                    filter: brightness(85%);
+                }
+            }
+        }
+    }
+
+    &:not(.settingsOpen) .settingsPanel {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.settingsOpen .settingsPanel {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+
 .row {
     border-radius: 0.6rem;
     margin: 0;
-    background-color: $blockColor;
+    background-color: var(--blockColor);
     justify-content: space-between;
     gap: 0.75rem;
     flex-flow: row wrap;
 
-    & .br {
-        flex-grow: 1;
-        flex-shrink: 0;
-        height: 0px;
-        width: 100%;
+    &.max {
+        gap: 0rem;
+        justify-content: space-between;
+
+        & .headerMain {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        & .headerSupport {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 0rem;
+
+            width: 50px !important;
+        }
+
+        & .settings {
+            width: 35px;
+            opacity: 0.4;
+            transition: opacity 0.2s ease-out;
+            padding: 0.1rem;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
     }
 
     &.error {
-        background: $errColor;
+        background: var(--errColor);
         flex-direction: row !important;
         align-items: center;
         justify-content: left;
@@ -146,8 +320,7 @@ body {
         }
     }
 
-    input.hostname,
-    input.address {
+    input[type="text"] {
         border-radius: 0.6rem;
         padding: 1rem 1.2rem 1rem 0.2rem !important;
         font-size: 1.3rem;
@@ -155,12 +328,12 @@ body {
         display: block;
         box-sizing: border-box;
         transition: border 0.2s;
-        background: $blockColor;
-        border-bottom: 0.1rem solid rgba($borderColor, 0);
+        background: var(--blockColor);
+        border-bottom: 0.1rem solid rgba(var(--borderColor), 0);
 
-        &:hover,
-        &:focus {
-            border-bottom: 0.1rem solid $borderColor;
+        &:not([disabled]):hover,
+        &:not([disabled]):focus {
+            border-bottom: 0.1rem solid rgba(var(--borderColor), 1);
             outline: none;
         }
     }
@@ -192,7 +365,6 @@ body {
             &.tick {
                 content: url("/assets/img/tick.svg");
                 cursor: pointer;
-
             }
 
             &.delete,
@@ -226,22 +398,40 @@ body {
             }
         }
     }
-
 }
 
 .btn {
-    background: $btnColor;
+    background: var(--btnColor);
     padding: 1rem;
     border-radius: 0.6rem;
     cursor: pointer;
     transition: 0.2s ease-out;
     user-select: none;
 
-    &:hover {
-        background: darken($btnColor, 15%);
+    &:not([disabled]):hover {
+        filter: brightness(85%);
     }
 
-    &:active {
-        background: darken($btnColor, 25%);
+    &:not([disabled]):active {
+        filter: brightness(75%);
+    }
+
+    &.red {
+        background: var(--btnRedColor);
+    }
+
+    &[disabled] {
+        filter: brightness(50%);
+        cursor: auto;
+    }
+}
+
+@keyframes spinGear {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
     }
 }

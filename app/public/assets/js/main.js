@@ -3,7 +3,9 @@ let mainScrollTrigger = 0;
 let greenRowColor = "#88FF667F";
 let redRowColor = "#E774747F";
 let actions = {
-    newHost: addNewRow
+    newHost: addNewRow,
+    settings: toggleSettings,
+    themeSwitch: toggleDarkMode
 };
 
 function $(selector) {
@@ -250,8 +252,27 @@ async function createError(row, err) {
     }
 }
 
+async function toggleSettings() {
+    $("body").classList.toggle("settingsOpen");
+}
 
-function resize() {
+async function toggleDarkMode(flag) {
+    let darkMode = isDarkMode();
+    flag = !!(flag ?? !darkMode);
+    
+    localStorage.setItem("darkmode", (flag).toString());
+    $("body").classList.toggle("darkmode", flag);
+}
+
+function isDarkMode() {
+    return localStorage.getItem("darkmode") === "true";
+}
+function isDarkModeSet() {
+    return localStorage.getItem("darkmode") !== null;
+}
+
+
+async function resize() {
     let main = $(".main");
 
     if (main.clientWidth <= 728) {
@@ -261,7 +282,7 @@ function resize() {
     }
 }
 
-function ready() {
+async function ready() {
     document.onclick = (event) => {
         let target = event.target;
 
@@ -274,10 +295,18 @@ function ready() {
             submit(target.parentElement.parentElement);
         } else if (target.matches(".cancel")) {
             cancelRow(target.parentElement.parentElement);
+        } else if (target.matches(".backdrop")) {
+            toggleSettings();
         }
     };
 
     $$(".row.host").forEach(prepareRow);
+    // if the user prefers dark mode or if the browser storage is set to dark mode then set the body to dark mode
+    if (!isDarkModeSet()) {
+        toggleDarkMode(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    } else {
+        toggleDarkMode(isDarkMode());
+    }
 
     window.onresize = resize;
 }
