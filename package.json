@@ -1,0 +1,51 @@
+{
+    "name": "@thebrenny/hostman",
+    "version": "2.0.0",
+    "description": "An interface to manage your system's hosts file, and does a bit more!",
+    "author": "TheBrenny <iam@justbrenny.me>",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/thebrenny/hostman/issues"
+    },
+    "homepage": "https://github.com/thebrenny/hostman#readme",
+    "main": "./hostman.js",
+    "bin": {
+        "hostman": "./hostman.js"
+    },
+    "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+        "postinstall": "node hostman install",
+        "preuninstall": "node hostman.js uninstall"
+    },
+    "dependencies": {
+        "hosts-etc": "^1.3.1",
+        "sudo-prompt": "^9.2.1"
+    },
+    "devDependencies": {
+        "@sveltejs/adapter-auto": "^3.0.0",
+        "@sveltejs/adapter-node": "^5.2.0",
+        "@sveltejs/kit": "^2.0.0",
+        "@sveltejs/vite-plugin-svelte": "^3.0.0",
+        "svelte": "^4.2.7",
+        "svelte-check": "^3.6.0",
+        "typescript": "^5.0.0",
+        "vite": "^5.0.3"
+    },
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/thebrenny/hostman.git"
+    },
+    "keywords": [
+        "hosts",
+        "dns",
+        "hostsfile",
+        "internet",
+        "interface",
+        "development"
+    ]
+}

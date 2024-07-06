@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="118.5"
+   height="118.5"
+   viewBox="0 0 31.353125 31.353125"
+   version="1.1"
+   id="svg424"
+   inkscape:version="1.2-alpha1 (b6a15bbbed, 2022-02-23)"
+   sodipodi:docname="favicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview426"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="9.5144352"
+     inkscape:cx="68.685107"
+     inkscape:cy="53.497658"
+     inkscape:window-width="3000"
+     inkscape:window-height="1876"
+     inkscape:window-x="-12"
+     inkscape:window-y="-12"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1669" />
+  <defs
+     id="defs421" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Icon"
+     inkscape:export-filename="C:\Users\TheBrenny\My Space\Programming\Web Apps\hostman\res\favicon.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96"
+     transform="matrix(0.26458333,0,0,0.26458333,-82.60971,-64.981311)">
+    <g
+       id="g1669"
+       inkscape:label="window group"
+       transform="translate(313.47568,269.34866)">
+      <rect
+         style="fill:none;stroke:#2db7f6;stroke-width:5.00000006;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="window"
+         width="116"
+         height="71"
+         x="0"
+         y="0"
+         ry="5"
+         rx="5"
+         inkscape:label="window" />
+      <path
+         style="fill:none;stroke:#2db7f6;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 1,14 H 116"
+         id="window_header"
+         inkscape:label="window_header" />
+      <circle
+         style="fill:none;stroke:#2db7f6;stroke-width:3.00000004;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button1"
+         cx="7"
+         cy="7.5"
+         r="2.5003078"
+         inkscape:label="button1" />
+      <circle
+         style="fill:none;stroke:#2db7f6;stroke-width:3.00000004;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button2"
+         cx="15"
+         cy="7.5"
+         r="2.5003073"
+         inkscape:label="button2" />
+      <circle
+         style="fill:none;stroke:#2db7f6;stroke-width:3.00000004;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="button3"
+         cx="23"
+         cy="7.5"
+         r="2.5003073"
+         inkscape:label="button3" />
+      <path
+         style="fill:none;stroke:#2db7f6;stroke-width:3.00000004;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 111,9 h -1 c -2,0 -2,-4 -4,-4 -2,0 -2,4 -4,4 C 100,9 100,5 98,5 96,5 96,9 94,9 92,9 92,5 90,5 88,5 88,9 86,9 84,9 84,5 82,5 80,5 80,9 78,9 76,9 76,5 74,5 72,5 72,9 70,9 h -1"
+         id="window_name"
+         inkscape:label="window_name" />
+      <path
+         style="fill:none;stroke:#2db7f6;stroke-width:5.00000006;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="m 62.323897,21.352469 c -0.744275,0.118135 -1.287716,0.762 -1.275904,1.512183 V 34.962119 H 27.779961 c -0.832884,0 -1.512183,0.6793 -1.512183,1.512183 v 12.097465 c 0,0.832884 0.679299,1.512183 1.512183,1.512183 h 33.268032 v 12.097467 c 0.01188,0.567069 0.336698,1.07507 0.844695,1.32316 0.507997,0.248091 1.110509,0.194934 1.565347,-0.141764 L 89.16515,43.704428 c 0.36033,-0.289442 0.567073,-0.720648 0.567073,-1.181393 0,-0.460741 -0.206743,-0.89195 -0.567073,-1.181394 L 63.458035,21.68326 c -0.318974,-0.259907 -0.726557,-0.378046 -1.134138,-0.330791"
+         id="path2772" />
+    </g>
+  </g>
+</svg>

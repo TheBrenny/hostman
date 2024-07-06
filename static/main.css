@@ -1,0 +1,44 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    --base-color: #81d4fa;
+    --block-color: #FFFFFF44;
+    --shadow-color: #22222222;
+    --border-color: #8e31e6;
+    --btn-color: #74D774;
+    --err-color: #E77474;
+
+    background-color: var(--base-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {
+    text-align: center;
+    box-sizing: border-box;
+    font-family: "Gintronic", "Nova Mono", "Roboto Mono", "Ubuntu Mono", "Courier New", "Courier", "monospace";
+}
+
+.btn {
+    background: var(--btn-color);
+    padding: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+    user-select: none;
+
+    &:hover {
+        filter: brightness(85%);
+    }
+
+    &:active {
+        filter: brightness(75%);
+    }
+}
