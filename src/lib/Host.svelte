@@ -12,6 +12,9 @@
     };
     export let state = HOST_STATES.SAVED;
 
+    /** @type {{hash:HTMLInputElement|null, host:HTMLInputElement|null, address:HTMLInputElement|null}} */
+    let inputs = { hash: null, host: null, address: null };
+
     let dispatch = createEventDispatcher();
     /** @type {AbortController} */
     let fetchAbortController = new AbortController();
@@ -24,7 +27,8 @@
 
                 host = host.trim();
                 address = address.trim();
-                console.log(host,address,"saving")
+
+                console.log(host, address, "saving");
 
                 if (host.length === 0 || address.length === 0) throw new Error("Host and address cannot be empty!");
 
@@ -44,7 +48,7 @@
                 state = HOST_STATES.SAVED;
                 toggleInputs(true);
 
-                dispatch("saved", { hash });
+                dispatch("saved", { hash, host, address });
             } catch (error) {
                 dispatch("error", { hash, error });
                 state = HOST_STATES.DRAFT;
@@ -56,7 +60,7 @@
                 // new host
                 if (!!fetchAbortController) fetchAbortController.abort();
                 toggleInputs(true);
-                dispatch("cancelNew", { hash });
+                dispatch("cancel", { hash });
             } else {
                 // existing host
                 toggleInputs(true);
@@ -64,7 +68,7 @@
                 host = backups.host + "";
                 hash = backups.hash + "";
                 address = backups.address + "";
-                dispatch("cancelChanges", { hash });
+                dispatch("cancel", { hash });
             }
         },
         remove: async () => {
@@ -80,6 +84,7 @@
 
                 if (!(status === 0 && updated === 1)) throw new Error(res.message || "Unable to remove host...");
 
+                state = HOST_STATES.SAVED;
                 dispatch("removed", { hash });
             } catch (error) {
                 dispatch("error", { hash, error });
@@ -89,15 +94,18 @@
         },
     };
 
-    /** @param {boolean} enabled */
+    $: if (host !== backups.host || address !== backups.address) {
+        state = HOST_STATES.DRAFT;
+    }
+
     function toggleInputs(enabled) {
-        document.querySelectorAll("input").forEach((input) => (input.disabled = !enabled));
+        Object.values(inputs).forEach((input) => input !== null && (input.disabled = !enabled));
     }
 </script>
 
-<input type="hidden" class="hash" bind:value={hash} />
-<input placeholder="hostname" type="text" class="hostname" bind:value={host} />
-<input placeholder="address" type="text" class="address" bind:value={address} />
+<input type="hidden" class="hash" bind:value={hash} bind:this={inputs.hash} />
+<input placeholder="hostname" type="text" class="hostname" bind:value={host} bind:this={inputs.host} />
+<input placeholder="address" type="text" class="address" bind:value={address} bind:this={inputs.address} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 <div class="actions">
@@ -180,7 +188,7 @@
         }
     }
 
-    @keyframes spinner {
+    @keyframes -global-spinner {
         0% {
             transform: rotate(0deg);
         }

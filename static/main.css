@@ -13,6 +13,8 @@ body {
     --border-color: #8e31e6;
     --btn-color: #74D774;
     --err-color: #E77474;
+    --green-row: #88FF667F;
+    --red-row: #E774747F;
 
     background-color: var(--base-color);
     display: flex;
