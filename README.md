@@ -13,6 +13,7 @@ The motivation for this project is quite simple, and likely one that you can sym
 The one extra thing that hostman can do though, is bind a hostname to a fully resolvable URL! So if you want to, you can point `http://yt` to `https://youtube.com`, or `http://git/` to `https://github.com`! Most browsers even accept `url/` as a valid URL!
 
 ## Installation
+###### (This installs hostman as a tool, not to [develop](#contributing))
 
 ```console
 $ npm install -g @thebrenny/hostman
@@ -32,7 +33,9 @@ All sudo/Admin requests are handled through `sudo-prompt` and all actions that m
 
 ## Contributing
 
-Once you've cloned and installed the dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Clone the repo, and run `npm install` (or `pnpm install` or `yarn`). The `postinstall` (and `preuninstall`) scripts won't execute as long `./.hostmanrepo` exists.
+
+Start a development server:
 
 ```bash
 npm run dev
