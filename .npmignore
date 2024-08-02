@@ -1,2 +1,4 @@
-docs/
-.vscode/
+!build/
+!install/
+!hostman.js
+.hostmanrepo
