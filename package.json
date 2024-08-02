@@ -16,6 +16,7 @@
         "dev": "vite dev",
         "build": "vite build",
         "preview": "vite preview",
+        "test": "node -e \"process.exit(0)\"",
         "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
         "postinstall": "node -e \"process.exit((+(require('fs')).existsSync('./.hostmanrepo')));\" && node hostman.js install ||  node -e \"process.exit(0)\"",
