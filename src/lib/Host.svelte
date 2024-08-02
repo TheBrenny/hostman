@@ -1,5 +1,5 @@
 <script>
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onMount } from "svelte";
     import { HOST_STATES } from "./utils";
 
     export let hash = "";
@@ -94,10 +94,27 @@
         },
     };
 
-    $: if (host !== backups.host || address !== backups.address) {
-        state = HOST_STATES.DRAFT;
+    $: {
+        if (host !== backups.host || address !== backups.address) {
+            state = HOST_STATES.DRAFT;
+        }
     }
 
+    onMount(() => {
+        inputs.address?.addEventListener("scroll", () => fixShadows(inputs.address));
+        inputs.host?.addEventListener("scroll", () => fixShadows(inputs.host));
+        fixShadows(inputs.address);
+        fixShadows(inputs.host);
+    });
+
+    function fixShadows(input) {
+        if (input === null) return; // All this does is shut up the linter!
+
+        if (input.scrollWidth > input.clientWidth) {
+            input.classList.toggle("shadowLeft", input.scrollLeft > 0);
+            input.classList.toggle("shadowRight", input.scrollWidth - input.clientWidth - input.scrollLeft > 1);
+        }
+    }
     function toggleInputs(enabled) {
         Object.values(inputs).forEach((input) => input !== null && (input.disabled = !enabled));
     }
@@ -121,15 +138,19 @@
 </div>
 
 <style>
-    input.hostname,
-    input.address {
+    input[type="text"] {
         border-radius: 0.6rem;
-        padding: 1rem 1.2rem 1rem 0.2rem !important;
+        padding: 1rem 0.2rem !important;
         font-size: 1.3rem;
         border: none;
         display: block;
         box-sizing: border-box;
-        transition: border 0.2s;
+        transition:
+            border 0.2s,
+            box-shadow 0.2s;
+        box-shadow:
+            inset -0.6em 0px 7px -6px #00000000,
+            inset 0.6em 0px 7px -6px #00000000;
         background: var(--block-color);
         border-bottom: 0.1rem solid transparent;
 
@@ -137,6 +158,22 @@
         &:focus {
             border-bottom: 0.1rem solid var(--border-color);
             outline: none;
+        }
+
+        &.shadowLeft {
+            box-shadow:
+                inset -0.6em 0px 7px -6px #00000000,
+                inset 0.6em 0px 7px -6px var(--shadow-color);
+        }
+        &.shadowRight {
+            box-shadow:
+                inset -0.6em 0px 7px -6px var(--shadow-color),
+                inset 0.6em 0px 7px -6px #00000000;
+        }
+        &.shadowLeft.shadowRight {
+            box-shadow:
+                inset -0.6em 0px 7px -6px var(--shadow-color),
+                inset 0.6em 0px 7px -6px var(--shadow-color);
         }
     }
 
