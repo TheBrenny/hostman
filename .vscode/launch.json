@@ -5,45 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "nodemon",
+            "command": "npm run dev",
+            "name": "npm run dev",
             "request": "launch",
-            "runtimeArgs": [
-                "run",
-                "debug-nodemon"
-            ],
-            "runtimeExecutable": "npm",
+            "type": "node-terminal",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "type": "node",
-            "env": {
-                "HOSTMAN_PORT": "3000"
-            }
-        },
-        {
-            "name": "Build Service",
-            "program": "${workspaceFolder}/hostman.js",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node",
-            "args": ["build-service"]
-        },
-        {
-            "args": [
-                "default"
-            ],
-            "name": "gulp default",
-            "program": "${workspaceFolder}/node_modules/gulp/bin/gulp.js",
-            "request": "launch",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node",
-            "env": {
-                "HOSTMAN_PORT": "3000"
-            }
-        },
+        }
     ]
 }

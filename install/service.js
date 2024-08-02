@@ -1,15 +1,17 @@
-const Service = (tryRequire("node-windows") || tryRequire("node-mac") || tryRequire("node-linix")).Service;
-const path = require("path");
+import {fileURLToPath} from "url";
 
-const serviceOps = {
+const nodeOS = await import("node-windows").then(mod => mod).catch(() => import("node-linux")).then(mode => mod).catch(() => import("node-mac")).then(mod => mod);
+const Service = nodeOS.Service;
+
+export const serviceOps = {
     name: "Hostman",
     description: "A web service to modify your hostfile. github.com/TheBrenny/hostman.",
-    script: path.resolve(__dirname, "../hostman.js"),
+    script: fileURLToPath(new URL(import.meta.url, "../hostman.js")),
 };
 
 const svc = new Service(serviceOps);
 
-function install() {
+export function install() {
     return new Promise((resolve, reject) => {
         svc.on("install", () => svc.start());
         svc.on('alreadyinstalled', () => console.log('This service is already installed.') && reject("alreadyinstalled"));
@@ -19,24 +21,10 @@ function install() {
     });
 }
 
-function uninstall() {
+export function uninstall() {
     return new Promise((resolve, reject) => {
         svc.on("uninstall", () => console.log("Service uninstalled!") && resolve());
         svc.on("error", (err) => console.error(err) && reject("error"));
         svc.uninstall();
     });
-}
-
-module.exports = {
-    install: install,
-    uninstall: uninstall,
-    serviceOps: serviceOps,
-};
-
-function tryRequire(path) {
-    try {
-        return require(path);
-    } catch(e) {
-        return null;
-    }
 }

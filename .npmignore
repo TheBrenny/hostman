@@ -1,4 +1,4 @@
-gulpfile.js
-res/
-todo.txt
-.vscode/
+!build/
+!install/
+!hostman.js
+.hostmanrepo
