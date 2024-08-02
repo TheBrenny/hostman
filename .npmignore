@@ -1,4 +1,6 @@
+*
 !build/
 !install/
 !hostman.js
-.hostmanrepo
+!package.json
+!README.md
