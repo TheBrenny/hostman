@@ -5,7 +5,7 @@
         if(process.argv[2] === "postinstall") await import("./install/postinstall");
         else if(process.argv[2] === "service" && process.argv.length > 3) {
             if(process.argv[3] === "install") (await import("./install/service")).install();
-            else if(process.argv[3] === "remove") (await import("./install/service")).uninstall();
+            else if(process.argv[3] === "uninstall") (await import("./install/service")).uninstall();
             else printUsage(1);
         } else printUsage(1);
     } else {
