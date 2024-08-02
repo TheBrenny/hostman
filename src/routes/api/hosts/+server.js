@@ -1,7 +1,8 @@
 import {json} from '@sveltejs/kit';
 const hostsEtc = (await import("hosts-etc")).useCache(false).promise;
 const hostsJson = (await import("./hostsJson"));
-const doSudo = (await import("./sudoThis.mjs")).doSudo;
+const sudoThis = (await import("./sudoThis.mjs")); // explicitly import the entire thing so we don't tree shake the other functions out
+const doSudo = await sudoThis.doSudo;
 
 /** @type {Array<string>} */
 let invincibles = [];
@@ -79,7 +80,7 @@ export async function DELETE({request}) {
 
         console.log(`Trying to remove '${host.host}' to '${host.address}'.`)
 
-        let r; // our functions return the number of hosts changed... %%
+        let r; // our functions return the number of hosts changed...
         if(isRedirect) r = parseInt(await hostsJson.remove(host)); // redirect json
         else r = parseInt(await doSudo("remove", host)); // into the hosts file
 

@@ -19,7 +19,7 @@ await doSudo("testJson", jsonFile)
 
 
 export async function get() {
-    let d = await fs.readFile(jsonFile)
+    let d = (await fs.readFile(jsonFile)).toString()
     let json = JSON.parse(d);
     return json;
 };
