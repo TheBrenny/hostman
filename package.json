@@ -47,6 +47,13 @@
         "type": "git",
         "url": "git+https://github.com/thebrenny/hostman.git"
     },
+    "files": [
+        "build/",
+        "install/",
+        "hostman.js",
+        "package.json",
+        "README.md"
+    ],
     "keywords": [
         "hosts",
         "dns",
