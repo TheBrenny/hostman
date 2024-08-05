@@ -21,6 +21,7 @@ export function install() {
         svc.on("start", () => console.log("Service started! Go to http://hostman:80") && resolve());
         svc.on("error", (err) => console.error(err) && reject("error"));
         svc.install();
+        svc.start();
     });
 }
 
@@ -28,6 +29,7 @@ export function uninstall() {
     return new Promise((resolve, reject) => {
         svc.on("uninstall", () => console.log("Service uninstalled!") && resolve());
         svc.on("error", (err) => console.error(err) && reject("error"));
+        svc.stop();
         svc.uninstall();
     });
 }
