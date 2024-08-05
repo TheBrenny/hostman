@@ -16,7 +16,7 @@ const svc = new Service(serviceOps);
 
 export function install() {
     return new Promise((resolve, reject) => {
-        svc.on("install", () => svc.start());
+        svc.on("install", () => console.log("Service installed. Starting...") && svc.start());
         svc.on('alreadyinstalled', () => console.log('This service is already installed.') && reject("alreadyinstalled"));
         svc.on("start", () => console.log("Service started! Go to http://hostman:80") && resolve());
         svc.on("error", (err) => console.error(err) && reject("error"));
