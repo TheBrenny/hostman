@@ -1,12 +1,15 @@
 import {fileURLToPath} from "url";
 
-const nodeOS = await import("node-windows").then(mod => mod).catch(() => import("node-linux")).then(mode => mod).catch(() => import("node-mac")).then(mod => mod);
+const nodeOS = await Promise.resolve()
+    .then(() => import("node-windows").then(mod => mod))
+    .catch(() => import("node-linux").then(mod => mod))
+    .catch(() => import("node-mac").then(mod => mod));
 const Service = nodeOS.Service;
 
 export const serviceOps = {
     name: "Hostman",
     description: "A web service to modify your hostfile. github.com/TheBrenny/hostman.",
-    script: fileURLToPath(new URL(import.meta.url, "../hostman.js")),
+    script: fileURLToPath(new URL("../hostman.js", import.meta.url)),
 };
 
 const svc = new Service(serviceOps);
