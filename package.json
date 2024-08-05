@@ -18,7 +18,8 @@
         "preview": "vite preview",
         "test": "node -e \"process.exit(0)\"",
         "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+        "prepublishOnly": "npm run build"
     },
     "dependencies": {
         "hosts-etc": "^1.3.1",
