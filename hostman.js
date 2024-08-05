@@ -2,7 +2,8 @@
 
 (async () => {
     if(process.argv.length > 2) {
-        if(process.argv[2] === "postinstall") await import("./install/postinstall");
+        if(process.argv[2] === "install") (await import("./install/install.js")).install1();
+        if(process.argv[2] === "uninstall") (await import("./install/uninstall.js")).step1();
         else if(process.argv[2] === "service" && process.argv.length > 3) {
             if(process.argv[3] === "install") (await import("./install/service")).install();
             else if(process.argv[3] === "uninstall") (await import("./install/service")).uninstall();
@@ -21,12 +22,13 @@
 })();
 
 function printUsage(exitCode = 0) {
-    console.log("Usage: hostman [post-install|build-service|remove-service]");
+    console.log("Usage: hostman [install|service install|service uninstall]");
     console.log("");
     console.log("Options:");
-    console.log("  hostman postinstall:      Saves the initial hostman binding to the hosts file as either the HOSTMAN_IP environment variable, or 127.3.3.3.");
-    console.log("  hostman service install:  Builds the service and starts it");
-    console.log("  hostman service remove:   Removes the service");
+    console.log("  hostman install:             Saves the initial hostman binding to the hosts file as either the HOSTMAN_IP environment variable, or 127.3.3.3");
+    console.log("  hostman uninstall:           Removes all hosts created via hostman");
+    console.log("  hostman service install:     Builds the service and starts it");
+    console.log("  hostman service uninstall:   Uninstalls the service. All hosts created using hostman will persist unless deleted via other means");
     console.log("");
     console.log("Entering any other commands will cause this help message to appear, and Hostman will not start.");
     console.log("");

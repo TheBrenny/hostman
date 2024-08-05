@@ -13,19 +13,27 @@ The motivation for this project is quite simple, and likely one that you can sym
 The one extra thing that hostman can do though, is bind a hostname to a fully resolvable URL! So if you want to, you can point `http://yt` to `https://youtube.com`, or `http://git/` to `https://github.com`! Most browsers even accept `url/` as a valid URL!
 
 ## Installation
-###### (This installs hostman as a tool, not to [develop](#contributing))
 
 ```console
 $ npm install -g @thebrenny/hostman
+$ hostman install
+$ hostman service install
 ```
 
-Hostman has a post-install script to install itself as a service and bind itself to `127.3.3.3`, but to do this it needs to have [access to sudo/Admin](#sudo) which will be asked during the install process. If the administative request fails, the post-install script will exit successfully in order to not disrupt the chain. To restart the administrative install again, run `hostman install`.
+Hostman has an additional install script ([`./install/install.js`](./install/install.js)) to bind itself to `127.3.3.3`, but to do this it needs to have [sudo/Admin](#sudo) privileges, which will be asked during the install process. If the administative request fails, the script will exit unsuccessfully (exit code provided by `sudo`, or `1`).
 
-If you don't install the service, you can execute `hostman run` to quickly spin up the server.
+If you don't install the service, you can execute `hostman` to quickly spin up the server.
 
-Hostman also makes it convenient to uninstall - running `npm uninstall -g @thebrenny/hostman` will automatically uninstall hostman and the service, however it will leave your hosts file in tact (in case you want to reinstall hostman again). Otherwise, if you want to keep hostman installed, but remove the service, run `hostman uninstall`, and you can still run `hostman run` to spin up the hostman server.
+### Uninstallation
 
-**The server needs to be up for non-IP bindings to be reachable!** If the server is down, bindings such as `yt -> youtube.com` will not work, but `yt -> 127.4.2.5` will.
+Hostman is also convenient to uninstall - running `hostman service uninstall` will uninstall the hostman service, however it will leave your hosts file in tact - therefore you can still run `hostman run` to spin up the hostman server.
+
+Running `hostman uninstall` will wipe all hostman-created hosts. This is handy to mass clear your hosts, however it's pretty detructive, and it might be easier to finesses the file by hand instead.
+
+### Notes
+
+- **The server needs to be up for non-IP bindings to be reachable!** If the server is down, bindings such as `yt -> youtube.com` will not work, but `yt -> 127.4.2.5` will.
+- **Uninstalling via npm without uninstalling the service can make your system whinge!** Make sure you delete the service first. Trust me. Maybe it's just Windows, but I had a lot of issues trying to delete the service without having hostman installed.
 
 ## Sudo
 
@@ -33,7 +41,7 @@ All sudo/Admin requests are handled through `sudo-prompt` and all actions that m
 
 ## Contributing
 
-Clone the repo, and run `npm install` (or `pnpm install` or `yarn`). The `postinstall` (and `preuninstall`) scripts won't execute as long `./.hostmanrepo` exists.
+Clone the repo, and run `npm install` (or `pnpm install` or `yarn`).
 
 Start a development server:
 
