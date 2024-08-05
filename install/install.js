@@ -32,7 +32,6 @@ export async function install1() {
 }
 
 export async function install2() {
-    const hosts = require("hosts-etc");
     let host = {
         host: "hostman",
         address: "127.3.3.3",
