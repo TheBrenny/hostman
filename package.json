@@ -1,6 +1,6 @@
 {
     "name": "@thebrenny/hostman",
-    "version": "2.1.9",
+    "version": "2.1.10",
     "description": "An interface to manage your system's hosts file, and does a bit more!",
     "author": "TheBrenny <iam@justbrenny.me>",
     "license": "GPL-3.0-or-later",
