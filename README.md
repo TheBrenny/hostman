@@ -64,6 +64,9 @@ You can preview the production build with `npm run preview`.
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+## License (see [`license.md`](./license.md))
 
-[MIT](https://choosealicense.com/licenses/mit/)
+| Project | License | Link                                     |
+| :-----: | :-----: | :--------------------------------------- |
+| Hostman |   MIT   | https://choosealicense.com/licenses/mit/ |
+|  WinSW  |   MIT   | https://choosealicense.com/licenses/mit/ |

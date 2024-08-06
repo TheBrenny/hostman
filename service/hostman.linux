@@ -1,0 +1,9 @@
+[Unit]
+Description=Hostman
+
+[Service]
+ExecStart={{script}}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

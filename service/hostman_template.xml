@@ -1,0 +1,27 @@
+<service>
+    <!-- Mandatory Options -->
+    <id>hostman</id>
+    <name>Hostman</name>
+    <description>A web service to modify your hostfile. github.com/TheBrenny/hostman.</description>
+    <executable>{{node}}</executable>
+    <arguments>{{args}}</arguments>
+
+    <!-- Installation -->
+    <onfailure action="restart" delay="10 sec"/>
+    <resetfailure>1 hour</resetfailure>
+
+    <!-- Executable management -->
+    <priority>Normal</priority>
+    <stoptimeout>10 sec</stoptimeout>
+    <stopparentprocessfirst>true</stopparentprocessfirst>
+
+    <!-- Service management -->
+    <startmode>Automatic</startmode>
+
+    <!-- Logging -->
+    <logpath>%BASE%\logs</logpath>
+    <log mode="roll">
+        <sizeThreshold>16</sizeThreshold>
+        <keepFiles>1</keepFiles>
+    </log>
+</service>
