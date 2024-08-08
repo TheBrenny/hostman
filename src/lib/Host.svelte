@@ -138,45 +138,6 @@
 </div>
 
 <style>
-    input[type="text"] {
-        border-radius: 0.6rem;
-        padding: 1rem 0.2rem !important;
-        font-size: 1.3rem;
-        border: none;
-        display: block;
-        box-sizing: border-box;
-        transition:
-            border 0.2s,
-            box-shadow 0.2s;
-        box-shadow:
-            inset -0.6em 0px 7px -6px #00000000,
-            inset 0.6em 0px 7px -6px #00000000;
-        background: var(--block-color);
-        border-bottom: 0.1rem solid transparent;
-
-        &:hover,
-        &:focus {
-            border-bottom: 0.1rem solid var(--border-color);
-            outline: none;
-        }
-
-        &.shadowLeft {
-            box-shadow:
-                inset -0.6em 0px 7px -6px #00000000,
-                inset 0.6em 0px 7px -6px var(--shadow-color);
-        }
-        &.shadowRight {
-            box-shadow:
-                inset -0.6em 0px 7px -6px var(--shadow-color),
-                inset 0.6em 0px 7px -6px #00000000;
-        }
-        &.shadowLeft.shadowRight {
-            box-shadow:
-                inset -0.6em 0px 7px -6px var(--shadow-color),
-                inset 0.6em 0px 7px -6px var(--shadow-color);
-        }
-    }
-
     input.address {
         flex-grow: 2;
     }

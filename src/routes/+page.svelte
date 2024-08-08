@@ -1,5 +1,8 @@
 <script>
+    import HmButton from "$lib/HmButton.svelte";
     import Host from "$lib/Host.svelte";
+    import SettingsPanel from "$lib/SettingsPanel.svelte";
+    import gearSvg from "$lib/assets/gear.svg";
     import { addEvent, clearTransitionPropWhenDone, dqs, did, HOST_STATES, setTransition, wait, colorRow } from "$lib/utils";
     import { onMount } from "svelte";
 
@@ -12,6 +15,7 @@
     export let hosts = data.hosts || [];
 
     let makingNewHost = false;
+    let showSettings = false;
 
     function newHost() {
         makingNewHost = true;
@@ -21,7 +25,12 @@
     /** @type {HTMLElement|undefined}*/
     let innerBox;
 
-    onMount(() => (window.onresize = resize)());
+    onMount(() => {
+        (window.onresize = resize)();
+
+        let darkMode = (localStorage.getItem("darkmode") ?? "false") === "true";
+        document.body.classList.toggle("dark", darkMode);
+    });
 
     function resize() {
         if (!innerBox) return;
@@ -80,6 +89,14 @@
                 colorRow(did(hash), "red");
             },
         },
+        settings: async (event) => {
+            showSettings = !showSettings;
+        },
+        switchTheme: async () => {
+            let darkMode = document.body.classList.contains("dark");
+            document.body.classList.toggle("dark", !darkMode);
+            localStorage.setItem("darkmode", (!darkMode).toString());
+        },
     };
 </script>
 
@@ -87,9 +104,17 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div class="wrapper">
     <div class="row header">
-        <h1>hostman</h1>
-        <div class="br"></div>
-        <p id="versionNumber">(v{version})</p>
+        <div class="block spacer"></div>
+        <div class="block mainHead">
+            <h1>hostman</h1>
+            <div class="br"></div>
+            <p id="versionNumber">(v{version})</p>
+        </div>
+        <div class="block settingsBox">
+            <HmButton style="display:flex;align-items:center;justify-content:center;width:50px;height:50px;" on:click={actions.settings}>
+                <img style="width: 35px" class="settings btn" src={gearSvg} alt="settings" />
+            </HmButton>
+        </div>
     </div>
     <div class="container">
         <div class="innerBox" bind:this={innerBox}>
@@ -107,9 +132,12 @@
         </div>
     </div>
     <div class="row newHost">
-        <div class="btn" on:click={newHost}>add new host</div>
+        <HmButton on:click={newHost} style="flex-grow: 0.25;">add new host</HmButton>
     </div>
 </div>
+{#if showSettings}
+    <SettingsPanel on:close={actions.settings} on:themeChange={actions.switchTheme} />
+{/if}
 
 <style>
     h1 {
@@ -150,8 +178,8 @@
         height: 80%;
         overflow-x: hidden;
         overflow-y: hidden;
-        background-color: var(--block-color);
-        box-shadow: inset 0 0 0.3rem 0.3rem var(--shadow-color);
+        background-color: var(--blockColor);
+        box-shadow: inset 0 0 0.3rem 0.3rem var(--shadowColor);
         border-radius: 0.6rem;
         padding: 0em 1em;
         padding-right: 0.5em;
@@ -172,7 +200,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background-color: var(--shadow-color);
+            background-color: var(--shadowColor);
             border-radius: 10em;
             margin: 1em;
         }
@@ -199,17 +227,26 @@
     .row {
         border-radius: 0.6rem;
         margin: 0;
-        background-color: var(--block-color);
+        background-color: var(--blockColor);
         justify-content: space-between;
         gap: 0.75rem;
         flex-flow: row wrap;
-    }
 
-    .row.newHost {
-        justify-content: center;
+        &.header {
+            align-items: center;
 
-        & .btn {
-            flex-grow: 0.25;
+            & > .block {
+                flex-grow: 1;
+                flex-basis: 0;
+
+                &.settingsBox {
+                    display: flex;
+                    justify-content: end;
+                }
+            }
+        }
+        &.newHost {
+            justify-content: center;
         }
     }
 </style>

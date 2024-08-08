@@ -19,7 +19,7 @@ export const did = (s) => document.getElementById(s);
 
 export async function colorRow(row, color) {
     if(row) {
-        row.style["background-color"] = `var(--${color}-row)`;
+        row.style["background-color"] = `var(--${color}Row)`;
         await wait(1000);
         setTransition(row, {
             "background-color": null,

@@ -7,19 +7,43 @@ body {
 }
 
 body {
-    --base-color: #81d4fa;
-    --block-color: #FFFFFF44;
-    --shadow-color: #22222222;
-    --border-color: #8e31e6;
-    --btn-color: #74D774;
-    --err-color: #E77474;
-    --green-row: #88FF667F;
-    --red-row: #E774747F;
+    --baseColorLight: #81d4fa;
+    --textColorLight: #201d1d;
+    --blockColorLight: #FFFFFF44;
 
-    background-color: var(--base-color);
+    --baseColorDark: #545c60;
+    --textColorDark: #f8f0f0;
+    --blockColorDark: #00000019;
+
+    --shadowColor: #22222222;
+    --borderColor: #8e31e6;
+    /* --borderColor: 142, 49, 230; */
+    --linkColor: orange;
+    --btnColor: #74D774;
+    --btnRedColor: #d83535;
+    --errColor: #E77474;
+    --greenRow: #88FF667F;
+    --redRow: #E774747F;
+
+    --baseColor: var(--baseColorLight);
+    --textColor: var(--textColorLight);
+    --blockColor: var(--blockColorLight);
+
+    background-color: var(--baseColor);
+    color: var(--textColor);
+
+    background-color: var(--baseColor);
     display: flex;
     justify-content: center;
     align-items: center;
+
+}
+
+body.dark {
+    transition: var(--baseColor) 0.2s, var(--textColor) 0.2s;
+    --baseColor: var(--baseColorDark);
+    --textColor: var(--textColorDark);
+    --blockColor: var(--blockColorDark);
 }
 
 * {
@@ -28,19 +52,48 @@ body {
     font-family: "Gintronic", "Nova Mono", "Roboto Mono", "Ubuntu Mono", "Courier New", "Courier", "monospace";
 }
 
-.btn {
-    background: var(--btn-color);
-    padding: 1rem;
+input[type="text"] {
     border-radius: 0.6rem;
-    cursor: pointer;
-    transition: 0.2s ease-out;
-    user-select: none;
+    color: var(--textColor);
+    padding: 1rem 0.2rem;
+    font-size: 1.3rem;
+    border: none;
+    display: block;
+    box-sizing: border-box;
+    transition:
+        border 0.2s,
+        box-shadow 0.2s;
+    box-shadow:
+        inset -0.6em 0px 7px -6px #00000000,
+        inset 0.6em 0px 7px -6px #00000000;
+    background: var(--blockColor);
+    border-bottom: 0.1rem solid transparent;
 
-    &:hover {
-        filter: brightness(85%);
+    &:hover,
+    &:focus {
+        border-bottom: 0.1rem solid var(--borderColor);
+        outline: none;
     }
 
-    &:active {
-        filter: brightness(75%);
+    &.shadowLeft {
+        box-shadow:
+            inset -0.6em 0px 7px -6px #00000000,
+            inset 0.6em 0px 7px -6px var(--shadowColor);
     }
+
+    &.shadowRight {
+        box-shadow:
+            inset -0.6em 0px 7px -6px var(--shadowColor),
+            inset 0.6em 0px 7px -6px #00000000;
+    }
+
+    &.shadowLeft.shadowRight {
+        box-shadow:
+            inset -0.6em 0px 7px -6px var(--shadowColor),
+            inset 0.6em 0px 7px -6px var(--shadowColor);
+    }
+}
+
+a {
+    color: var(--linkColor);
 }
