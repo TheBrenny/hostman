@@ -43,12 +43,12 @@
     },
     "files": [
         "build/",
+        "install/",
         "service/hostman_template.xml",
         "service/hostman.linux",
         "service/hostman64.exe",
         "service/hostman86.exe",
         "service/service.js",
-        "install/",
         "hostman.js",
         "package.json",
         "README.md"
