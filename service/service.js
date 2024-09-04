@@ -65,11 +65,10 @@ export async function installLinux() {
 
     let service = (await fs.readFile(serviceFile("./hostman.linux"))).toString();
     service = service.replace("{{script}}", script);
-    // writing is in the sudo call below
 
     await new Promise((resolve, reject) => {
         let serveFile = "/etc/systemd/system/hostman.service";
-        sudo(`cat ${serviceFile("./hostman.linux")} > ${serveFile} && systemctl enable hostman && systemctl start hostman`, {name: "hostman installer"}, (err, stdout, stderr) => {
+        sudo(`echo "${service}" > ${serveFile} && systemctl enable hostman && systemctl start hostman`, {name: "hostman installer"}, (err, stdout, stderr) => {
             if(err || stderr) reject(err || stderr);
             else resolve(stdout);
         });

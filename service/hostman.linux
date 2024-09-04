@@ -2,7 +2,7 @@
 Description=Hostman
 
 [Service]
-ExecStart={{script}}
+ExecStart=node {{script}}
 Restart=always
 
 [Install]

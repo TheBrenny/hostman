@@ -2,11 +2,11 @@
 
 (async () => {
     if(process.argv.length > 2) {
-        if(process.argv[2] === "install") (await import("./install/install.js")).install1();
-        if(process.argv[2] === "uninstall") (await import("./install/install.js")).uninstall1();
+        if(process.argv[2] === "install") return (await import("./install/install.js")).install1();
+        else if(process.argv[2] === "uninstall") return (await import("./install/install.js")).uninstall1();
         else if(process.argv[2] === "service" && process.argv.length > 3) {
-            if(process.argv[3] === "install") (await import("./service/service.js")).install();
-            else if(process.argv[3] === "uninstall") (await import("./service/service.js")).uninstall();
+            if(process.argv[3] === "install") return (await import("./service/service.js")).install();
+            else if(process.argv[3] === "uninstall") return (await import("./service/service.js")).uninstall();
             else printUsage(1);
         } else printUsage(1);
     } else {
@@ -17,7 +17,7 @@
         process.env["PROTO"] = process.env["PROTO"] ?? "http";
         process.env["ORIGIN"] = process.env["ORIGIN"] ?? (`${process.env["PROTO"]}://${process.env["HOST"]}:${process.env["PORT"]}`);
 
-        await import("./build/index.js");
+        return await import("./build/index.js");
     }
 })();
 

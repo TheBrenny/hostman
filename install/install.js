@@ -16,7 +16,8 @@ export async function install1() {
         let node = process.argv[0];
         let install = url.pathToFileURL(import.meta.filename);
 
-        await new Promise((resolve, _) => {
+        return await new Promise((resolve, _) => {
+            console.log(`${node} --import="${install.href}" -e "import('${install.href}').then((mod) => mod.install2())"`);
             sudo(`${node} --import="${install.href}" -e "import('${install.href}').then((mod) => mod.install2())"`, {name: "hostman_installer"},
                 (err, stdout, stderr) => {
                     if(err || stderr) throw (err || stderr);
